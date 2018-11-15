@@ -2,44 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="90bbf6c7-2d9b-42e7-beaf-0770931614aa" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/Patterns/PatternProducerConsumerWithMethodWaitAndNotify.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/ThreadSafeClasses/LearningCountDownLatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/FirstLess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/FourthLess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/MySecondThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/MyThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Runner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SecondLess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/WaitAndNotify.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Work.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/Calculate.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/CalculateAbs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/CalculateInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Abstracts/AbstractEmployee.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Classes/ItDeveloper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Classes/Journalist.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Interfaces/EmployerInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/Calculator$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/Calculator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorFrame.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$CommandAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$InsertAction.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/Theory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/Theory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/Training.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/Training.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadAndSortFileAgain/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadAndSortFileAgain/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadAndSortFileAgain/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadAndSortFileAgain/Mouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadAndSortFileAgain/TestCreateCollections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadAndSortFileAgain/TestCreateCollections.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadSongTitleUdnerFileTxt/JokeBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadSongTitleUdnerFileTxt/JokeBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadSongTitleUdnerFileTxt/LearnTreeSetCollections/Mouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadSongTitleUdnerFileTxt/LearnTreeSetCollections/Mouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadSongTitleUdnerFileTxt/LearnTreeSetCollections/MouseBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadSongTitleUdnerFileTxt/LearnTreeSetCollections/MouseBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnCollections/TryToReadSongTitleUdnerFileTxt/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnCollections/TryToReadSongTitleUdnerFileTxt/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnDownClass/Electrocar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnDownClass/Electrocar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnEquals/LearnEquals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnEquals/LearnEquals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnGenerics/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnGenerics/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnGenerics/Dog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnGenerics/Dog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnGenerics/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnGenerics/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnHowCreateNewObject/Hiy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/Hiy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnHowCreateNewObject/TryRunNewObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/TryRunNewObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnLoops/DoWhileLoops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnLoops/DoWhileLoops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnLoops/Switch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnLoops/Switch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnLoops/TrueWhile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnLoops/TrueWhile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnLoops/WhileLoops.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnLoops/WhileLoops.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnSerialised/LearnWriteObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnSerialised/LearnWriteObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnSerialised/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnSerialised/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnSerialised/ReadObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnSerialised/ReadObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnSerialised/people.bin" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnSerialised/people.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnTreads/ChatClient/SimpleChatClientA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnTreads/ChatClient/SimpleChatClientA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnTreads/DailyAdvice/DailyAdviceClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnTreads/DailyAdvice/DailyAdviceClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnTreads/DailyAdvice/DailyAdviceServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnTreads/DailyAdvice/DailyAdviceServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LearnTreads/FirstLess/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnTreads/FirstLess/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/BouquetComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/BouquetComponents.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/EdibleBouquet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/EdibleBouquet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/InstaShopEdibleBouquet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/InstaShopEdibleBouquet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/MeetEdibleBouquet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/MeetEdibleBouquet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/Product.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OnlyForFun/SweetEdibleBouquet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/OnlyForFun/SweetEdibleBouquet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadFile/ReadingFromFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/ReadFile/ReadingFromFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WriteToFile/WriteToFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/WriteToFile/WriteToFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test2.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -99,14 +104,24 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="2" />
-          <entry key="java" value="6" />
+          <entry key="gitignore" value="4" />
+          <entry key="java" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="6" />
-          <entry key="PLAIN_TEXT" value="2" />
+          <entry key="JAVA" value="13" />
+          <entry key="PLAIN_TEXT" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="1004" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="1004" />
         </counts>
       </usages-collector>
     </session>
@@ -117,19 +132,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/SixthLessLearnWaitAndNotifyMethods.java">
+        <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/Patterns/PatternProducerConsumerWithMethodWaitAndNotify.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
+            <state relative-caret-position="990">
+              <caret line="66" column="9" lean-forward="true" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
+        <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/ThreadSafeClasses/LearningCountDownLatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1950">
-              <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
+            <state relative-caret-position="285">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#398#399#0" expanded="true" />
+                <element signature="e#450#451#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,7 +179,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/CalculateInterface.java" />
         <option value="$PROJECT_DIR$/src/Calculate.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/com/forfun/calculator/src/Main.java" />
         <option value="$PROJECT_DIR$/src/com/forfun/calculator/src/CalculateInterface.java" />
         <option value="$PROJECT_DIR$/src/com/forfun/calculator/src/Calculate.java" />
@@ -200,6 +222,9 @@
         <option value="$PROJECT_DIR$/src/com/edu/LearnJava/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods.java" />
         <option value="$PROJECT_DIR$/src/com/edu/LearnJava/Calculator/Calculator.java" />
         <option value="$PROJECT_DIR$/src/.gitignore" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/Patterns/PatternProducerConsumerWithMethodWaitAndNotify.java" />
+        <option value="$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/ThreadSafeClasses/LearningCountDownLatch.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -352,15 +377,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
               <item name="LearnThreads" type="462c0819:PsiDirectoryNode" />
-              <item name="Patterns" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LearnJava" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
-              <item name="LearnThreads" type="462c0819:PsiDirectoryNode" />
-              <item name="SixthLessLearnWaitAndNotifyMethods.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+              <item name="ThreadSafeClasses" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -373,7 +390,7 @@
     <property name="SearchEverywhereHistoryKey" value="IOE&#9;PSI&#9;JAVA://java.io.IOException&#10;Throw&#9;PSI&#9;JAVA://java.lang.Throwable&#10;Math&#9;PSI&#9;JAVA://java.lang.Math&#10;Random&#9;PSI&#9;JAVA://java.util.Random&#10;scope&#9;ACTION&#9;NewGuiceScopeAnnotation" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542296319168" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542301432542" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -401,26 +418,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SixthLessLearnWaitAndNotifyMethods">
-    <configuration name="FourthLess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.LearnThreads.FourthLess" />
+  <component name="RunManager" selected="Application.LearningCountDownLatch">
+    <configuration name="LearningCountDownLatch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.education.LearnJava.LearnThreads.ThreadSafeClasses.LearningCountDownLatch" />
       <module name="com.forfun.calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.java.com.education.LearnThreads.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.Main" />
-      <module name="com.forfun.calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.com.forfun.calculator.com.education.OOP.Structure.*" />
+          <option name="PATTERN" value="com.education.LearnJava.LearnThreads.ThreadSafeClasses.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -438,12 +442,12 @@
         </pattern>
       </extension>
     </configuration>
-    <configuration name="ProducerPattern" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.LearnThreads.Patterns.ProducerPattern" />
+    <configuration name="PatternProducerConsumerWithMethodWaitAndNotify" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.education.LearnJava.LearnThreads.Patterns.PatternProducerConsumerWithMethodWaitAndNotify" />
       <module name="com.forfun.calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.java.com.education.LearnThreads.Patterns.*" />
+          <option name="PATTERN" value="com.education.LearnJava.LearnThreads.Patterns.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -451,38 +455,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SixthLessLearnWaitAndNotifyMethods" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.LearnThreads.SixthLessLearnWaitAndNotifyMethods" />
+    <configuration name="SecondLess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.education.LearnJava.LearnThreads.SecondLess" />
       <module name="com.forfun.calculator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.java.com.education.LearnThreads.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ThirdLess" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.LearnThreads.ThirdLess" />
-      <module name="com.forfun.calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.com.education.LearnThreads.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ThirdLessSecondPart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.java.com.education.LearnThreads.ThirdLessSecondPart" />
-      <module name="com.forfun.calculator" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="main.java.com.education.LearnThreads.*" />
+          <option name="PATTERN" value="com.education.LearnJava.LearnThreads.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -491,20 +469,15 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="Application.ThirdLess" />
-      <item itemvalue="Application.ThirdLessSecondPart" />
-      <item itemvalue="Application.FourthLess" />
-      <item itemvalue="Application.ProducerPattern" />
-      <item itemvalue="Application.SixthLessLearnWaitAndNotifyMethods" />
+      <item itemvalue="Application.SecondLess" />
+      <item itemvalue="Application.PatternProducerConsumerWithMethodWaitAndNotify" />
+      <item itemvalue="Application.LearningCountDownLatch" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SixthLessLearnWaitAndNotifyMethods" />
-        <item itemvalue="Application.ProducerPattern" />
-        <item itemvalue="Application.FourthLess" />
-        <item itemvalue="Application.ThirdLessSecondPart" />
-        <item itemvalue="Application.ThirdLess" />
+        <item itemvalue="Application.LearningCountDownLatch" />
+        <item itemvalue="Application.PatternProducerConsumerWithMethodWaitAndNotify" />
+        <item itemvalue="Application.SecondLess" />
       </list>
     </recent_temporary>
   </component>
@@ -535,7 +508,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47927000" />
+    <option name="totallyTimeSpent" value="51411000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -612,31 +585,33 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/forfun/calculator/test/CalculatorPanel.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/forfun/calculator/test/CalculatorFrame.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/com/education/LearnThreads/Worker.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/edu/LearnJava/education/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/com/edu/LearnJava/education/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/Patterns/PatternProducerConsumerWithMethodWaitAndNotify.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/Calculator/Calculator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/SixthLessLearnWaitAndNotifyMethods.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="47" column="6" selection-start-line="47" selection-start-column="6" selection-end-line="47" selection-end-column="6" />
+        <state relative-caret-position="990">
+          <caret line="66" column="9" lean-forward="true" selection-start-line="66" selection-start-column="9" selection-end-line="66" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1950">
-          <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
+        <state relative-caret-position="396">
+          <caret line="235" column="114" selection-start-line="235" selection-start-column="114" selection-end-line="235" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnThreads/ThreadSafeClasses/LearningCountDownLatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#398#399#0" expanded="true" />
+            <element signature="e#450#451#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

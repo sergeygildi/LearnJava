@@ -1,4 +1,0 @@
-package OnlyForFun;
-
-interface Product {
-}
