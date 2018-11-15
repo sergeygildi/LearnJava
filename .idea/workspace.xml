@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90bbf6c7-2d9b-42e7-beaf-0770931614aa" name="Default" comment="" />
+    <list default="true" id="90bbf6c7-2d9b-42e7-beaf-0770931614aa" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/FirstLess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/FourthLess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/MySecondThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/MyThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Patterns/ProducerPattern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Runner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SecondLess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart$Worker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/ThirdLessSecondPart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/WaitAndNotify.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/LearnThreads/Work.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/Calculate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/CalculateAbs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/OOP/Structure/CalculateInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Abstracts/AbstractEmployee.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Classes/ItDeveloper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Classes/Journalist.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/education/polimorpfizm/Interfaces/EmployerInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/Calculator$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/Calculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$CommandAction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel$InsertAction.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/com.forfun.calculator/main/java/com/forfun/calculator/test/CalculatorPanel.class" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,14 +99,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="gitignore" value="1" />
+          <entry key="gitignore" value="2" />
           <entry key="java" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="JAVA" value="6" />
-          <entry key="PLAIN_TEXT" value="1" />
+          <entry key="PLAIN_TEXT" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -87,10 +126,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/.gitignore">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="117" column="65" selection-start-line="117" selection-start-column="65" selection-end-line="117" selection-end-column="65" />
+            <state relative-caret-position="1950">
+              <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -105,6 +144,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/com/education/LearnJava/polimorpfizm/Abstracts/AbstractEmployee.java" root0="FORCE_HIGHLIGHTING" />
@@ -158,6 +200,7 @@
         <option value="$PROJECT_DIR$/src/com/edu/LearnJava/education/LearnThreads/SixthLessLearnWaitAndNotifyMethods.java" />
         <option value="$PROJECT_DIR$/src/com/edu/LearnJava/Calculator/Calculator.java" />
         <option value="$PROJECT_DIR$/src/.gitignore" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -270,6 +313,7 @@
       </profile-state>
     </entry>
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -329,7 +373,7 @@
     <property name="SearchEverywhereHistoryKey" value="IOE&#9;PSI&#9;JAVA://java.io.IOException&#10;Throw&#9;PSI&#9;JAVA://java.lang.Throwable&#10;Math&#9;PSI&#9;JAVA://java.lang.Math&#10;Random&#9;PSI&#9;JAVA://java.util.Random&#10;scope&#9;ACTION&#9;NewGuiceScopeAnnotation" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542296137232" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542296319168" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -486,12 +530,12 @@
       <workItem from="1541193279367" duration="1013000" />
       <workItem from="1541538533165" duration="727000" />
       <workItem from="1542279433391" duration="15281000" />
-      <workItem from="1542295524793" duration="427000" />
+      <workItem from="1542295524793" duration="613000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47741000" />
+    <option name="totallyTimeSpent" value="47927000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -504,7 +548,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="825" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49931788" visible="true" weight="0.18884121" />
       <window_info id="Structure" order="1" sideWeight="0.5006821" side_tool="true" weight="0.18240343" />
@@ -590,10 +633,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/.gitignore">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="117" column="65" selection-start-line="117" selection-start-column="65" selection-end-line="117" selection-end-column="65" />
+        <state relative-caret-position="1950">
+          <caret line="130" column="1" selection-start-line="130" selection-start-column="1" selection-end-line="130" selection-end-column="1" />
         </state>
       </provider>
     </entry>
