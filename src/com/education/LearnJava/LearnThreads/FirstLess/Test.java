@@ -1,4 +1,4 @@
-package com.education.LearnJava.LearnTreads.FirstLess;
+package com.education.LearnJava.LearnThreads.FirstLess;
 
 public class Test {
 
