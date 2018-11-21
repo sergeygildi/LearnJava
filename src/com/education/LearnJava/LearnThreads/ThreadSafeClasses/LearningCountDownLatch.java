@@ -22,8 +22,6 @@ public class LearningCountDownLatch {
         countDownLatch.await();
         System.out.println("Latch has been opened, main thread is proceeding");
     }
-
-
 }
 
 class Processor implements Runnable {
@@ -41,7 +39,6 @@ class Processor implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         countDownLatch.countDown();
     }
 }

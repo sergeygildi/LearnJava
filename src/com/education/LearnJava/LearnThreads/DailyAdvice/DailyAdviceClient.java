@@ -1,4 +1,4 @@
-package com.education.LearnJava.LearnTreads.DailyAdvice;
+package com.education.LearnJava.LearnThreads.DailyAdvice;
 
 import java.io.BufferedReader;
 import java.io.IOException;

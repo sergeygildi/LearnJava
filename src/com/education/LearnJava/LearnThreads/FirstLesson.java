@@ -3,7 +3,7 @@ package com.education.LearnJava.LearnThreads;
 /**
  * Created by Serhii Hildi on 15.11.18.
  */
-public class FirstLess {
+public class FirstLesson {
     public static void main(String[] args) {
 
         new Thread(new Runner()).start();
@@ -31,7 +31,7 @@ public class FirstLess {
 
         @Override
         public void run() {
-           new FirstLess().go();
+           new FirstLesson().go();
         }
     }
 
@@ -39,6 +39,6 @@ public class FirstLess {
 
         @Override
         public void run() {
-            new FirstLess().go();
+            new FirstLesson().go();
         }
     }

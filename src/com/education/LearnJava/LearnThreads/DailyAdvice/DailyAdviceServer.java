@@ -1,4 +1,4 @@
-package com.education.LearnJava.LearnTreads.DailyAdvice;
+package com.education.LearnJava.LearnThreads.DailyAdvice;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +14,7 @@ public class DailyAdviceServer {
 
             while (true){
 
-                PrintWriter writer = new PrintWriter(new ServerSocket(4242)
+                PrintWriter writer = new PrintWriter(new ServerSocket(5000)
                         .accept()
                         .getOutputStream());
 
