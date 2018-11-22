@@ -1,3 +1,5 @@
+package com.education.LearnJava;
+
 public class JavaSEMethods {
 
     public static void main(String[] args) {

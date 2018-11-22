@@ -1,3 +1,5 @@
+package com.education.LearnJava;
+
 import java.util.Collections;
 import java.util.Random;
 

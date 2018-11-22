@@ -1,12 +1,11 @@
+package com.education.LearnJava;
+
 public class LearnStringBuilder {
 
     public static void main(String[] args) {
 
         StringBuilder sb = new StringBuilder("Hello");
         System.out.println(sb.toString());
-
-
-
 
         sb.append(" my").append(" friend");
         System.out.println(sb.toString());
@@ -29,6 +28,4 @@ public class LearnStringBuilder {
          * This is a int, 12,21
          */
     }
-
-
 }
