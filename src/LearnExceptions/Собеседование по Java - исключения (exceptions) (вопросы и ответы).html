@@ -1,0 +1,1070 @@
+<h1 class="entry-title">Собеседование по Java — исключения (exceptions) (вопросы и ответы)</h1>
+
+
+            <p>Список вопросов и ответов по теме «Исключения в Java».<span id="more-2006"></span></p>
+
+<h3>Вопросы</h3>
+<p>1. Дайте определение понятию “исключение”<br>
+2. Какова иерархия исключений.<br>
+3. Можно/нужно ли обрабатывать ошибки jvm?<br>
+4. Какие существуют способы обработки исключений?<br>
+5. О чем говорит ключевое слово throws?<br>
+6. В чем особенность блока finally? Всегда ли он исполняется?<br>
+7. Может ли не быть ни одного блока catch при отлавливании исключений?<br>
+8. Могли бы вы придумать ситуацию, когда блок finally не будет выполнен?<br>
+9. Может ли один блок catch отлавливать несколько исключений (с одной и разных веток наследований)?<br>
+10. Что вы знаете об обрабатываемых и не обрабатываемых (catched/uncatched) исключениях?<br>
+11. В чем особенность RuntimeException?<br>
+12. Как написать собственное (“пользовательское”) исключение? Какими мотивами вы будете руководствоваться при выборе типа исключения: checked/unchecked?<br>
+13. Какой оператор позволяет принудительно выбросить исключение?<br>
+14. Есть ли дополнительные условия к методу, который потенциально может выбросить исключение?<br>
+15. Может ли метод main выбросить исключение во вне и если да, то где будет происходить обработка данного исключения?<br>
+16. Если оператор return содержится и в блоке catch и в finally, какой из них “главнее”?<br>
+17. Что вы знаете о OutOfMemoryError?<br>
+18. Что вы знаете о SQLException? К какому типу checked или unchecked оно относится, почему?<br>
+19. Что такое Error? В каком случае используется Error. Приведите пример Error’а.<br>
+20. Какая конструкция используется в Java для обработки исключений?<br>
+21. Предположим, есть блок try-finally. В блоке try возникло исключение и выполнение переместилось в блок finally. В блоке finally тоже возникло исключение. Какое из двух исключений “выпадет” из блока try-finally? Что случится со вторым исключением?<br>
+22. Предположим, есть метод, который может выбросить IOException и FileNotFoundException в какой последовательности должны идти блоки catch? Сколько блоков catch будет выполнено?</p>
+<h3>Ответы</h3>
+<h4>1. Дайте определение понятию “исключение”</h4>
+<p><strong>Исключение </strong>— это проблема(ошибка) возникающая во время выполнения программы. Исключения могут возникать во многих случаях, например:</p>
+<ol>
+<li>Пользователь ввел некорректные данные.</li>
+<li>Файл, к которому обращается программа, не найден.</li>
+<li>Сетевое соединение с сервером было утеряно во время передачи данных. И т.д.</li>
+</ol>
+<p>Все исключения в Java являются объектами. Поэтому они могут порождаться не только автоматически при возникновении исключительной ситуации, но и создаваться самим разработчиком.</p>
+<h4>2. Какова иерархия исключений.</h4>
+<p><a href="http://javastudy.ru/wp-content/uploads/2016/01/exceptionsInJavaHierarchy.png" rel="lightbox[2006]" title="Иерархия Исключений Java" class="cboxElement"><img class="alignnone wp-image-2015 size-medium" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/exceptionsInJavaHierarchy-300x130.png" alt="Иерархия Исключений Java" width="300" height="130" srcset="http://javastudy.ru/wp-content/uploads/2016/01/exceptionsInJavaHierarchy-300x130.png 300w, http://javastudy.ru/wp-content/uploads/2016/01/exceptionsInJavaHierarchy-1024x444.png 1024w, http://javastudy.ru/wp-content/uploads/2016/01/exceptionsInJavaHierarchy.png 1377w" sizes="(max-width: 300px) 100vw, 300px"></a></p>
+<p>Исключения делятся на несколько классов, но все они имеют общего предка — класс Throwable. Его потомками являются подклассы Exception и Error.</p>
+<p>Исключения (Exceptions) являются результатом проблем в программе, которые в принципе решаемы и предсказуемы. Например, произошло деление на ноль в целых числах.</p>
+<p>Ошибки (Errors) представляют собой более серьёзные проблемы, которые, согласно спецификации Java, не следует пытаться обрабатывать в собственной программе, поскольку они связаны с проблемами уровня JVM. Например, исключения такого рода возникают, если закончилась память, доступная виртуальной машине. Программа дополнительную память всё равно не сможет обеспечить для JVM.</p>
+<p>В Java все исключения делятся на два&nbsp;типа: контролируемые исключения (checked) и неконтролируемые исключения (unchecked), к которым относятся ошибки (Errors) и исключения времени выполнения (RuntimeExceptions, потомок класса Exception).</p>
+<p>Контролируемые исключения представляют собой ошибки, которые можно и нужно обрабатывать в программе, к этому типу относятся все потомки класса Exception (но не RuntimeException).</p>
+<h4>3. Можно/нужно ли обрабатывать ошибки jvm?</h4>
+<p>Обрабатывать можно, но делать этого не стоит. Разработчику не предоставлены инструменты для обработки ошибок системы и виртуальной машины.</p>
+<h4>4. Какие существуют способы обработки исключений?</h4>
+<div>В Java есть пять ключевых слов для работы с исключениями:</div>
+<div>
+<ol>
+<li><strong>try </strong>— данное ключевое слово используется для отметки начала блока кода, который потенциально может привести к ошибке.</li>
+<li><strong>catch </strong>— ключевое слово для отметки начала блока кода, предназначенного для перехвата и обработки исключений.</li>
+<li><strong>finally </strong>— ключевое слово для отметки начала блока кода, которой является дополнительным. Этот блок помещается после последнего блока ‘catch’. Управление обычно передаётся в блок ‘finally’ в любом случае.</li>
+<li><strong>throw </strong>— служит для генерации исключений.</li>
+<li><strong>throws </strong>— ключевое слово, которое прописывается в сигнатуре метода, и обозначающее что метод потенциально может выбросить исключение с указанным типом.</li>
+</ol>
+<p>Общий вид конструкции для «поимки» исключительной ситуации выглядит следующим образом:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b278c686460197" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try{ 
+//здесь код, который потенциально может привести к ошибке 
+} 
+catch(SomeException e ){ //в скобках указывается класс конкретной ожидаемой ошибки  
+//здесь описываются действия, направленные на обработку исключений 
+} 
+finally{ 
+//выполняется в любом случае ( блок finally  не обязателен) 
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b278c686460197-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b278c686460197-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b278c686460197-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b278c686460197-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b278c686460197-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b278c686460197-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b278c686460197-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b278c686460197-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b278c686460197-9" style="height: 18px;">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b278c686460197-1"><span class="crayon-st">try</span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b278c686460197-2"><span class="crayon-c">//здесь код, который потенциально может привести к ошибке </span></div><div class="crayon-line" id="crayon-5be560d9b278c686460197-3"><span class="crayon-sy">}</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b278c686460197-4"><span class="crayon-st">catch</span><span class="crayon-sy">(</span><span class="crayon-i">SomeException</span><span class="crayon-h"> </span><span class="crayon-i">e</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-c">//в скобках указывается класс конкретной ожидаемой ошибки&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5be560d9b278c686460197-5"><span class="crayon-c">//здесь описываются действия, направленные на обработку исключений </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b278c686460197-6"><span class="crayon-sy">}</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b278c686460197-7"><span class="crayon-st">finally</span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b278c686460197-8"><span class="crayon-c">//выполняется в любом случае ( блок finally&nbsp;&nbsp;не обязателен) </span></div><div class="crayon-line" id="crayon-5be560d9b278c686460197-9"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p>
+</p></div>
+<h5>Подробнее&nbsp;http://www.quizful.net/post/java-exceptions</h5>
+<h4>5. О чем говорит ключевое слово throws?</h4>
+<p><strong>throws </strong>— ключевое слово, которое прописывается в сигнатуре метода, и обозначающее что метод потенциально может выбросить исключение с указанным типом.</p>
+<h4>6. В чем особенность блока finally? Всегда ли он исполняется?</h4>
+<p>Когда исключение передано, выполнение метода направляется по нелинейному пути. Это может стать источником проблем. Например, при входе метод открывает файл и закрывает при выходе. Чтобы закрытие файла не было пропущено из-за обработки исключения, был предложен механизм <b>finally</b>.</p>
+<p>Ключевое слово <b>finally</b> создаёт блок кода, который будет выполнен после завершения блока <b>try/catch</b>, но перед кодом, следующим за ним. Блок будет выполнен, независимо от того, передано исключение или нет. Оператор <b>finally</b> не обязателен, однако каждый оператор <b>try</b> требует наличия либо <b>catch</b>, либо <b>finally</b>. Код в блоке <strong>finally</strong> будет выполнен <strong>всегда</strong>.</p>
+<h4>7. Может ли не быть ни одного блока catch при отлавливании исключений?</h4>
+<p>Такая запись допустима, если имеется связка try{} finally {}. Но смысла в такой записи не так много, всё же лучше иметь блок catch в котором будет обрабатываться необходимое исключение.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b2797848191071" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">String x = "z";
+try {
+   x="234";
+} finally {
+    x = "Finally";
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b2797848191071-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b2797848191071-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b2797848191071-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b2797848191071-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b2797848191071-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b2797848191071-6" style="height: 18px;">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b2797848191071-1"><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"z"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b2797848191071-2"><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b2797848191071-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-v">x</span><span class="crayon-o">=</span><span class="crayon-s">"234"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b2797848191071-4"><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b2797848191071-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"Finally"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b2797848191071-6"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0010 seconds] -->
+<p></p>
+<h4>8. Могли бы вы придумать ситуацию, когда блок finally не будет выполнен?</h4>
+<p>Блок finally выполняется не всегда, например&nbsp;в такой ситуации:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b279b214394488" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try { 
+    System.exit(0); 
+} catch(Exception e) { 
+    e.printStackTrace(); 
+} finally { }</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b279b214394488-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b279b214394488-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b279b214394488-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b279b214394488-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b279b214394488-5" style="height: 18px;">5</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b279b214394488-1"><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b279b214394488-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-e">exit</span><span class="crayon-sy">(</span><span class="crayon-cn">0</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b279b214394488-3"><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-sy">(</span><span class="crayon-i">Exception</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b279b214394488-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">e</span><span class="crayon-sy">.</span><span class="crayon-e">printStackTrace</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b279b214394488-5"><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0013 seconds] -->
+<p>Здесь finally недостижим, так как происходит системный выход из программы.&nbsp;Общими словами: когда jvm умирает, ей не до finally (отсюда можете придумать другие примеры как убить jvm и ответить на вопрос в заголовке).</p>
+<h4>9. Может ли один блок catch отлавливать несколько исключений (с одной и разных веток наследований)?</h4>
+<div>В <strong>Java 7</strong> стала доступна новая конструкция, с помощью которой можно перехватывать несколько исключений одним блоком catch:</div>
+<p></p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b279e538778026" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try {  
+ ... 
+} catch( IOException | SQLException ex ) {  
+  logger.log(ex); 
+  throw ex; 
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b279e538778026-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b279e538778026-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b279e538778026-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b279e538778026-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b279e538778026-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b279e538778026-6" style="height: 18px;">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b279e538778026-1"><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h">&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b279e538778026-2"><span class="crayon-h"> </span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-sy">.</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b279e538778026-3"><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-sy">(</span><span class="crayon-h"> </span><span class="crayon-e">IOException | SQLException </span><span class="crayon-i">ex</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h">&nbsp;&nbsp;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b279e538778026-4"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-v">logger</span><span class="crayon-sy">.</span><span class="crayon-e">log</span><span class="crayon-sy">(</span><span class="crayon-v">ex</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b279e538778026-5"><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-st">throw</span><span class="crayon-h"> </span><span class="crayon-v">ex</span><span class="crayon-sy">;</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b279e538778026-6"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0009 seconds] -->
+<p></p>
+<h4>10. Что вы знаете об обрабатываемых и не обрабатываемых (catched/uncatched) исключениях?</h4>
+<p>Все исключительные ситуации делятся на «проверяемые» (checked) и «непроверяемые» (unchecked) (смотрите картинку в начале статьи). Это свойство присуще «корневищу» (Throwable, Error, Exception, RuntimeException) и передается по наследству. Никак не видимо в исходном коде класса исключения.<br>
+В дальнейших примерах просто учтите, что— Throwable и Exception и все их наследники (за исключением наследников Error-а и RuntimeException-а) — checked<br>
+— Error и RuntimeException и все их наследники — unchecked<br>
+checked exception = проверяемое исключение, проверяемое компилятором.</p>
+<p>Тема достаточно обширная для того, чтобы уместить ее в одном ответе. К примеру, можно разобрать примеры Головача:&nbsp;http://habrahabr.ru/company/golovachcourses/blog/225585/</p>
+<p>И еще с quizful.net</p>
+<p>1. Checked исключения, это те, которые должны обрабатываться блоком catch или описываться в сигнатуре метода. Unchecked могут не обрабатываться и не быть описанными.<br>
+2. Unchecked исключения в Java — наследованные от RuntimeException, checked — от Exception (не включая unchecked).</p>
+<p>Checked исключения отличаются от Unchecked исключения в Java, тем что:<br>
+1)Наличие\обработка <strong>Checked</strong> исключения проверяются <strong>на этапе компиляции</strong>. Наличие\обработка <strong>Unchecked</strong> исключения происходит <strong>на этапе выполнения</strong>.</p>
+<h4>11. В чем особенность RuntimeException?</h4>
+<p>public class RuntimeException extends Exception — базовый класс для ошибок во время выполнения. Относится к необрабатываемым&nbsp;исключениям (uncatched\unchecked). Как сказано в описании класса — это суперкласс, исключения которого могут быть выброшены во время нормальной работы JVM.</p>
+<h4>12. Как написать собственное (“пользовательское”) исключение? Какими мотивами вы будете руководствоваться при выборе типа исключения: checked/unchecked?</h4>
+<p>Необходимо унаследоваться от базового класса требуемого типа исключений (например от Exception или RuntimeException).</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27a2854137802" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">public class ExcClass extends Exception {
+
+    private String someString;
+
+    public ExcClass (String string) {
+        this.someString = string;
+        System.out.println("Exception ExcClass");
+    }
+
+    public void myOwnExceptionMsg() {
+        System.err.println("This is exception massage for string: " + someString);
+    }
+}
+
+public class TestExc {
+
+    public static void main(String[] args) {
+        try {
+            String s = "SomeString";
+            throw new ExcClass(s);
+        } catch (ExcClass ex) {
+            ex.myOwnExceptionMsg();
+        }
+    }
+}
+//Вывод
+Exception ExcClass
+This is exception massage for string: SomeString</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-9" style="height: 18px;">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-10" style="height: 18px;">10</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-11" style="height: 18px;">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-12" style="height: 18px;">12</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-13" style="height: 18px;">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-14" style="height: 18px;">14</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-15" style="height: 18px;">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-16" style="height: 18px;">16</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-17" style="height: 18px;">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-18" style="height: 18px;">18</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-19" style="height: 18px;">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-20" style="height: 18px;">20</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-21" style="height: 18px;">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-22" style="height: 18px;">22</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-23" style="height: 18px;">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-24" style="height: 18px;">24</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-25" style="height: 18px;">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-26" style="height: 18px;">26</div><div class="crayon-num" data-line="crayon-5be560d9b27a2854137802-27" style="height: 18px;">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a2854137802-28" style="height: 18px;">28</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27a2854137802-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">ExcClass</span><span class="crayon-h"> </span><span class="crayon-r">extends</span><span class="crayon-h"> </span><span class="crayon-e">Exception</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-2">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">private</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">someString</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-4">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-e">ExcClass</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-r">this</span><span class="crayon-sy">.</span><span class="crayon-v">someString</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"Exception ExcClass"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-9">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">myOwnExceptionMsg</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">err</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-s">"This is exception massage for string: "</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-v">someString</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-13"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-14">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-15"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">TestExc</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-16">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-18"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">s</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"SomeString"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">throw</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">ExcClass</span><span class="crayon-sy">(</span><span class="crayon-v">s</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">ExcClass </span><span class="crayon-v">ex</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">ex</span><span class="crayon-sy">.</span><span class="crayon-e">myOwnExceptionMsg</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-25"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-26"><span class="crayon-c">//Вывод</span></div><div class="crayon-line" id="crayon-5be560d9b27a2854137802-27"><span class="crayon-e">Exception </span><span class="crayon-e">ExcClass</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a2854137802-28"><span class="crayon-r">This</span><span class="crayon-h"> </span><span class="crayon-st">is</span><span class="crayon-h"> </span><span class="crayon-e">exception </span><span class="crayon-e">massage </span><span class="crayon-st">for</span><span class="crayon-h"> </span><span class="crayon-t">string</span><span class="crayon-o">:</span><span class="crayon-h"> </span><span class="crayon-v">SomeString</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0023 seconds] -->
+<p>Руководствоваться нужно определением типа исключения. В зависимости от того, что вы хотите обрабатывать или видеть нужно и наследоваться от нужного класса.</p>
+<h4>13. Какой оператор позволяет принудительно выбросить исключение?</h4>
+<p><span style="color: #ff0000;">throw</span> new Exception();</p>
+<h4>14. Есть ли дополнительные условия к методу, который потенциально может выбросить исключение?</h4>
+<p>Если это проверяемое исключение, то оно должно быть задекларировано в сигнатуре метода.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27a6953568407" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;"> public void someMethod() throws Exception {
+    }</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27a6953568407-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a6953568407-2" style="height: 18px;">2</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27a6953568407-1"><span class="crayon-h"> </span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">someMethod</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-m">throws</span><span class="crayon-h"> </span><span class="crayon-e">Exception</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a6953568407-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p></p>
+<h4>15. Может ли метод main выбросить исключение во вне и если да, то где будет происходить обработка данного исключения?</h4>
+<p>Может и оно будет передано в виртуальную машину Java (JVM).</p>
+<h4>16. Если оператор return содержится и в блоке catch и в finally, какой из них “главнее”?</h4>
+<p>Вернется из блока finally.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27a9890530984" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">    public static void main(String[] args) {
+       String what =  method();
+        System.out.println(what);
+    }
+
+    public static String method() {
+        try {
+            return "SomeString";
+        } finally {
+            return "Finally message";
+        }
+    }
+//Вывод
+Finally message</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-9" style="height: 18px;">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-10" style="height: 18px;">10</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-11" style="height: 18px;">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-12" style="height: 18px;">12</div><div class="crayon-num" data-line="crayon-5be560d9b27a9890530984-13" style="height: 18px;">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27a9890530984-14" style="height: 18px;">14</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27a9890530984-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">what</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h">&nbsp;&nbsp;</span><span class="crayon-e">method</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-v">what</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-5">&nbsp;</div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-e">method</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-s">"SomeString"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-s">"Finally message"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27a9890530984-13"><span class="crayon-c">//Вывод</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27a9890530984-14"><span class="crayon-st">Finally</span><span class="crayon-h"> </span><span class="crayon-v">message</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0012 seconds] -->
+<p></p>
+<h4>17. Что вы знаете о OutOfMemoryError?</h4>
+<p>OutOfMemoryError выбрасывается, когда виртуальная машина Java не может выделить (разместить) объект из-за нехватки памяти, а сборщик мусора не может высвободить ещё.</p>
+<p>Область памяти, занимаемая java процессом, состоит из нескольких частей. Тип OutOfMemoryError зависит от того, в какой из них не хватило места.<br>
+<a href="http://javastudy.ru/wp-content/uploads/2016/01/outOfMemoryTypes.png" rel="lightbox[2006]" title="Области памяти" class="cboxElement"><img class="alignnone wp-image-2020 size-medium" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/outOfMemoryTypes-300x84.png" alt="Области памяти" width="300" height="84" srcset="http://javastudy.ru/wp-content/uploads/2016/01/outOfMemoryTypes-300x84.png 300w, http://javastudy.ru/wp-content/uploads/2016/01/outOfMemoryTypes.png 569w" sizes="(max-width: 300px) 100vw, 300px"></a></p>
+<p>1. java.lang.OutOfMemoryError: Java heap space<br>
+Не хватает места&nbsp;в куче, а именно, в области памяти в которую помещаются объекты, создаваемые программно в вашем приложении. Размер задается параметрами -Xms и -Xmx. Если вы пытаетесь создать объект, а места в куче не осталось, то получаете эту ошибку. Обычно проблема кроется в утечке памяти, коих бывает великое множество, и интернет просто пестрит статьями на эту тему.</p>
+<p>2. java.lang.OutOfMemoryError: PermGen space<br>
+Данная ошибка возникает при нехватке места в Permanent области, размер которой задается параметрами -XX:PermSize и -XX:MaxPermSize.</p>
+<p>3. java.lang.OutOfMemoryError: GC overhead limit exceeded<br>
+Данная ошибка может возникнуть как при переполнении первой, так и второй областей. Связана она с тем, что памяти осталось мало и GC постоянно работает, пытаясь высвободить немного места. Данную ошибку можно отключить с помощью параметра -XX:-UseGCOverheadLimit, но, конечно же, её надо не отключать, а либо решать проблему утечки памяти, либо выделять больше объема, либо менять настройки GC.</p>
+<p>4. java.lang.OutOfMemoryError: unable to create new native thread</p>
+<p>Выбрасывается, когда нет возможности создать еще потоки.</p>
+<h5>Подробнее в статье&nbsp;http://habrahabr.ru/post/117274/</h5>
+<h4>18. Что вы знаете о SQLException? К какому типу checked или unchecked оно относится, почему?</h4>
+<p>SQLException предоставляет информацию об ошибках доступа к базе данных или других ошибках связанных с работой с базами данных.</p>
+<p>SQLException относится к checked исключениям, а значит проверяется на этапе компиляции.</p>
+<p>Споры об этом типе исключения идут о том, что разработчику приходится постоянно обрабатывать это исключение в коде, хотя большая часть ошибок возникает во время выполнения программы, т.е., по мнению многих, лучше бы отнести его к unchecked runtime исключениям.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27ae333052586" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try {
+    // make some SQL call(s)
+} catch {SQLException e) { 
+    // log the exception
+    return; // and give up
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27ae333052586-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27ae333052586-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27ae333052586-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27ae333052586-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27ae333052586-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27ae333052586-6" style="height: 18px;">6</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27ae333052586-1"><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27ae333052586-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// make some SQL call(s)</span></div><div class="crayon-line" id="crayon-5be560d9b27ae333052586-3"><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-i">SQLException</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27ae333052586-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">// log the exception</span></div><div class="crayon-line" id="crayon-5be560d9b27ae333052586-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-sy">;</span><span class="crayon-h"> </span><span class="crayon-c">// and give up</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27ae333052586-6"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0005 seconds] -->
+<p>Аргумент&nbsp;Joshua Bloch из&nbsp;Effective Java Second Edition такой: сделав SQLException проверяемым — это попытка заставить разработчиков обработать исключение и обернуть его в новом уровне абстракции.</p>
+<h4>19. Что такое Error? В каком случае используется Error. Приведите пример Error’а.</h4>
+<p>Ошибки (Errors) представляют собой более серьёзные проблемы, которые, согласно спецификации Java, не следует пытаться обрабатывать в собственной программе, поскольку они связаны с проблемами уровня JVM. Например, исключения такого рода возникают, если закончилась память, доступная виртуальной машине.</p>
+<p>За примером посмотрите картинку иерархии исключений вначале статьи. Как пример — OutOfMemoryError.</p>
+<h4>20. Какая конструкция используется в Java для обработки исключений?</h4>
+<p>Можно использовать try-catch-finally и c 7й Java try-with-resources. Первый способ:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27b2550544355" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try{ 
+//здесь код, который потенциально может привести к ошибке 
+} 
+catch(SomeException e ){ //в скобках указывается класс конкретной ожидаемой ошибки  
+//здесь описываются действия, направленные на обработку исключений 
+} 
+finally{ 
+//выполняется в любом случае ( блок finally  не обязателен) 
+}</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27b2550544355-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b2550544355-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27b2550544355-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b2550544355-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27b2550544355-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b2550544355-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27b2550544355-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b2550544355-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27b2550544355-9" style="height: 18px;">9</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27b2550544355-1"><span class="crayon-st">try</span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b2550544355-2"><span class="crayon-c">//здесь код, который потенциально может привести к ошибке </span></div><div class="crayon-line" id="crayon-5be560d9b27b2550544355-3"><span class="crayon-sy">}</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b2550544355-4"><span class="crayon-st">catch</span><span class="crayon-sy">(</span><span class="crayon-i">SomeException</span><span class="crayon-h"> </span><span class="crayon-i">e</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-sy">{</span><span class="crayon-h"> </span><span class="crayon-c">//в скобках указывается класс конкретной ожидаемой ошибки&nbsp;&nbsp;</span></div><div class="crayon-line" id="crayon-5be560d9b27b2550544355-5"><span class="crayon-c">//здесь описываются действия, направленные на обработку исключений </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b2550544355-6"><span class="crayon-sy">}</span><span class="crayon-h"> </span></div><div class="crayon-line" id="crayon-5be560d9b27b2550544355-7"><span class="crayon-st">finally</span><span class="crayon-sy">{</span><span class="crayon-h"> </span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b2550544355-8"><span class="crayon-c">//выполняется в любом случае ( блок finally&nbsp;&nbsp;не обязателен) </span></div><div class="crayon-line" id="crayon-5be560d9b27b2550544355-9"><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0006 seconds] -->
+<p>Try с ресурсами:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27b6508549100" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">try(открываем файл и т.п. здесь){
+ //...
+}
+//после блока файл закроется автоматически.</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27b6508549100-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b6508549100-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27b6508549100-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b6508549100-4" style="height: 18px;">4</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27b6508549100-1"><span class="crayon-st">try</span><span class="crayon-sy">(</span>открываем<span class="crayon-h"> </span>файл<span class="crayon-h"> </span>и<span class="crayon-h"> </span>т<span class="crayon-sy">.</span>п<span class="crayon-sy">.</span><span class="crayon-h"> </span>здесь<span class="crayon-sy">)</span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b6508549100-2"><span class="crayon-h"> </span><span class="crayon-c">//...</span></div><div class="crayon-line" id="crayon-5be560d9b27b6508549100-3"><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b6508549100-4"><span class="crayon-c">//после блока файл закроется автоматически.</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0004 seconds] -->
+<p>Пример:</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27b8754664710" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">Старый способ
+ BufferedReader br = new BufferedReader(new FileReader(path));
+   try {
+            return br.readLine();
+        } finally {
+            if (br != null) {
+                br.close();
+            }
+        }
+
+JDK 7
+
+ try (BufferedReader br =
+                   new BufferedReader(new FileReader(path)) ) {
+        return br.readLine();
+    }</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-9" style="height: 18px;">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-10" style="height: 18px;">10</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-11" style="height: 18px;">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-12" style="height: 18px;">12</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-13" style="height: 18px;">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-14" style="height: 18px;">14</div><div class="crayon-num" data-line="crayon-5be560d9b27b8754664710-15" style="height: 18px;">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27b8754664710-16" style="height: 18px;">16</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27b8754664710-1">Старый<span class="crayon-h"> </span>способ</div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-2"><span class="crayon-h"> </span><span class="crayon-e">BufferedReader </span><span class="crayon-v">br</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">BufferedReader</span><span class="crayon-sy">(</span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">FileReader</span><span class="crayon-sy">(</span><span class="crayon-v">path</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-3"><span class="crayon-h">&nbsp;&nbsp; </span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">br</span><span class="crayon-sy">.</span><span class="crayon-e">readLine</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">br</span><span class="crayon-h"> </span><span class="crayon-o">!=</span><span class="crayon-h"> </span><span class="crayon-t">null</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">br</span><span class="crayon-sy">.</span><span class="crayon-e">close</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-10">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-11"><span class="crayon-i">JDK</span><span class="crayon-h"> </span><span class="crayon-cn">7</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-12">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-13"><span class="crayon-h"> </span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">BufferedReader </span><span class="crayon-v">br</span><span class="crayon-h"> </span><span class="crayon-o">=</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">BufferedReader</span><span class="crayon-sy">(</span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">FileReader</span><span class="crayon-sy">(</span><span class="crayon-v">path</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27b8754664710-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">br</span><span class="crayon-sy">.</span><span class="crayon-e">readLine</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27b8754664710-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0015 seconds] -->
+<p>Так же смотрите ответ к «Какие существуют способы обработки исключений?»</p>
+<h4>21. Предположим, есть блок try-finally. В блоке try возникло исключение и выполнение переместилось в блок finally. В блоке finally тоже возникло исключение.&nbsp;Какое из двух исключений “выпадет” из блока try-finally? Что случится со вторым исключением?</h4>
+<p>Ответ аналогичный случаю с двумя return — будет обработано в finally блоке. Если было выброшено два исключения — одно в try, второе в finally, то исключение в finally «проглотит» исключение выше (см. пример). Если до блока finally исключение было обработано, то мы можем получить информацию об исключении в блоке try и тем самым не потерять исключение, которое впоследствии может быть перезаписано в finally другим исключением.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27bc750129763" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">public class TestExc {
+
+    public static void main(String[] args) {
+        Exception ex = twoExceptionsMethod();
+        System.out.println(ex.getClass());
+
+        String s = twoExceptionsMethod2();
+        System.out.println(s);
+    }
+
+    public static Exception twoExceptionsMethod() {
+        try {
+            return new IndexOutOfBoundsException();
+        } finally {
+            return new NullPointerException();
+        }
+    }
+
+    public static String twoExceptionsMethod2() {
+        try {
+            throw new NullPointerException();
+        }catch (NullPointerException ex) {
+            System.out.println(ex.getMessage()+ " catch");;
+        }
+        finally {
+            Exception ex2 = new Exception();
+            return ex2.getMessage() + "finally";
+        }
+    }
+}
+//Вывод
+class java.lang.NullPointerException
+null catchBlock
+null finallyBlock</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-9" style="height: 18px;">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-10" style="height: 18px;">10</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-11" style="height: 18px;">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-12" style="height: 18px;">12</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-13" style="height: 18px;">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-14" style="height: 18px;">14</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-15" style="height: 18px;">15</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-16" style="height: 18px;">16</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-17" style="height: 18px;">17</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-18" style="height: 18px;">18</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-19" style="height: 18px;">19</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-20" style="height: 18px;">20</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-21" style="height: 18px;">21</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-22" style="height: 18px;">22</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-23" style="height: 18px;">23</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-24" style="height: 18px;">24</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-25" style="height: 18px;">25</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-26" style="height: 18px;">26</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-27" style="height: 18px;">27</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-28" style="height: 18px;">28</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-29" style="height: 18px;">29</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-30" style="height: 18px;">30</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-31" style="height: 18px;">31</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-32" style="height: 18px;">32</div><div class="crayon-num" data-line="crayon-5be560d9b27bc750129763-33" style="height: 18px;">33</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27bc750129763-34" style="height: 18px;">34</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27bc750129763-1"><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-e">TestExc</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-2">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">main</span><span class="crayon-sy">(</span><span class="crayon-t">String</span><span class="crayon-sy">[</span><span class="crayon-sy">]</span><span class="crayon-h"> </span><span class="crayon-v">args</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">Exception </span><span class="crayon-v">ex</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">twoExceptionsMethod</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-v">ex</span><span class="crayon-sy">.</span><span class="crayon-e">getClass</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-6">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">s</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-e">twoExceptionsMethod2</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-v">s</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-10">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-e">Exception </span><span class="crayon-e">twoExceptionsMethod</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">IndexOutOfBoundsException</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">NullPointerException</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-16"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-17"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-18">&nbsp;</div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-19"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-e">twoExceptionsMethod2</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-20"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-21"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">throw</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">NullPointerException</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-22"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-e">NullPointerException </span><span class="crayon-v">ex</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-23"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">System</span><span class="crayon-sy">.</span><span class="crayon-v">out</span><span class="crayon-sy">.</span><span class="crayon-e">println</span><span class="crayon-sy">(</span><span class="crayon-v">ex</span><span class="crayon-sy">.</span><span class="crayon-e">getMessage</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-s">" catch"</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-24"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-25"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">finally</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-26"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-e">Exception </span><span class="crayon-v">ex2</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">Exception</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-27"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">return</span><span class="crayon-h"> </span><span class="crayon-v">ex2</span><span class="crayon-sy">.</span><span class="crayon-e">getMessage</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-o">+</span><span class="crayon-h"> </span><span class="crayon-s">"finally"</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-28"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-29"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-30"><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-31"><span class="crayon-c">//Вывод</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-32"><span class="crayon-t">class</span><span class="crayon-h"> </span><span class="crayon-v">java</span><span class="crayon-sy">.</span><span class="crayon-v">lang</span><span class="crayon-sy">.</span><span class="crayon-e">NullPointerException</span></div><div class="crayon-line" id="crayon-5be560d9b27bc750129763-33"><span class="crayon-t">null</span><span class="crayon-h"> </span><span class="crayon-e">catchBlock</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27bc750129763-34"><span class="crayon-t">null</span><span class="crayon-h"> </span><span class="crayon-v">finallyBlock</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0030 seconds] -->
+<p></p>
+<h4>22. Предположим, есть метод, который может выбросить IOException и FileNotFoundException в какой последовательности должны идти блоки catch? Сколько блоков catch будет выполнено?</h4>
+<p>Общее правило — обрабатывать исключения нужно от «младшего» к старшему. Т.е. нельзя поставить в первый блок <span style="color: #ff0000;">catch(Exception e) {}</span>, иначе&nbsp;все дальнейшие блоки <span style="color: #ff0000;">catch()</span> уже ничего не смогут обработать, т.к. любое исключение будет&nbsp;попадать под ExceptionName extends Exception.</p>
+<p>Таким образом сначала нужно обработать <span style="color: #ff0000;">public class FileNotFoundException extends IOException</span>, а затем уже IOException.</p><!-- Crayon Syntax Highlighter v_2.7.2_beta -->
+
+		<div id="crayon-5be560d9b27c0980827357" class="crayon-syntax crayon-theme-familiar crayon-font-arial crayon-os-pc print-yes notranslate crayon-wrapped" data-settings=" minimize scroll-mouseover wrap" style="margin-top: 12px; margin-bottom: 12px; font-size: 14px !important; line-height: 18px !important; height: auto;">
+		
+			<div class="crayon-plain-wrap"><textarea class="crayon-plain print-no form-control" data-settings="dblclick" readonly="" style="tab-size: 4; font-size: 14px !important; line-height: 18px !important; z-index: 0; opacity: 0; overflow: hidden;">    public static void ioExcAndFileNotFoundEx() {
+        try {
+            //TODO: some code
+            String x = "abc";
+            if (x.equals("abc")) {
+                throw new IOException();
+            } else {
+                throw new FileNotFoundException();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.getMessage();
+        }
+    }</textarea></div>
+			<div class="crayon-main" style="position: relative; z-index: 1; overflow: hidden;">
+				<table class="crayon-table" style="">
+					<tbody><tr class="crayon-row">
+				<td class="crayon-nums " data-settings="show">
+					<div class="crayon-nums-content" style="font-size: 14px !important; line-height: 18px !important;"><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-1" style="height: 18px;">1</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-2" style="height: 18px;">2</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-3" style="height: 18px;">3</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-4" style="height: 18px;">4</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-5" style="height: 18px;">5</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-6" style="height: 18px;">6</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-7" style="height: 18px;">7</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-8" style="height: 18px;">8</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-9" style="height: 18px;">9</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-10" style="height: 18px;">10</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-11" style="height: 18px;">11</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-12" style="height: 18px;">12</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-13" style="height: 18px;">13</div><div class="crayon-num crayon-striped-num" data-line="crayon-5be560d9b27c0980827357-14" style="height: 18px;">14</div><div class="crayon-num" data-line="crayon-5be560d9b27c0980827357-15" style="height: 18px;">15</div></div>
+				</td>
+						<td class="crayon-code"><div class="crayon-pre" style="font-size: 14px !important; line-height: 18px !important; -moz-tab-size:4; -o-tab-size:4; -webkit-tab-size:4; tab-size:4;"><div class="crayon-line" id="crayon-5be560d9b27c0980827357-1"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-m">public</span><span class="crayon-h"> </span><span class="crayon-m">static</span><span class="crayon-h"> </span><span class="crayon-t">void</span><span class="crayon-h"> </span><span class="crayon-e">ioExcAndFileNotFoundEx</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-2"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">try</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-3"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-c">//TODO: some code</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-4"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-t">String</span><span class="crayon-h"> </span><span class="crayon-v">x</span><span class="crayon-h"> </span><span class="crayon-o">=</span><span class="crayon-h"> </span><span class="crayon-s">"abc"</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-5"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">if</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-v">x</span><span class="crayon-sy">.</span><span class="crayon-e">equals</span><span class="crayon-sy">(</span><span class="crayon-s">"abc"</span><span class="crayon-sy">)</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-6"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">throw</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">IOException</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-7"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">else</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-8"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-st">throw</span><span class="crayon-h"> </span><span class="crayon-r">new</span><span class="crayon-h"> </span><span class="crayon-e">FileNotFoundException</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-9"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-10"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">FileNotFoundException</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-11"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">e</span><span class="crayon-sy">.</span><span class="crayon-e">printStackTrace</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-12"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span><span class="crayon-h"> </span><span class="crayon-st">catch</span><span class="crayon-h"> </span><span class="crayon-sy">(</span><span class="crayon-i">IOException</span><span class="crayon-h"> </span><span class="crayon-v">e</span><span class="crayon-sy">)</span><span class="crayon-h"> </span><span class="crayon-sy">{</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-13"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-v">e</span><span class="crayon-sy">.</span><span class="crayon-e">getMessage</span><span class="crayon-sy">(</span><span class="crayon-sy">)</span><span class="crayon-sy">;</span></div><div class="crayon-line crayon-striped-line" id="crayon-5be560d9b27c0980827357-14"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div><div class="crayon-line" id="crayon-5be560d9b27c0980827357-15"><span class="crayon-h">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="crayon-sy">}</span></div></div></td>
+					</tr>
+				</tbody></table>
+			</div>
+		</div>
+<!-- [Format Time: 0.0016 seconds] -->
+<p>&nbsp;</p>
+<h5><a href="http://javastudy.ru/interview/list-of-question-java-interview/">К списку вопросов по всем темам</a></h5>
+<div style="padding-bottom:20px; padding-top:10px;" class="hupso-share-buttons"><!-- Hupso Share Buttons - http://www.hupso.com/share/ --><a class="hupso_toolbar" href="http://www.hupso.com/share/"><img src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/share-medium.png" style="border:0px; padding-top:5px; float:left;" alt="Share Button"></a><script type="text/javascript">var hupso_services_t=new Array("Twitter","Facebook","VKontakte");var hupso_background_t="#EAF4FF";var hupso_border_t="#66CCFF";var hupso_toolbar_size_t="medium";var hupso_twitter_via = "java2study";var hupso_image_folder_url = "";var hupso_twitter_via="java2study";var hupso_url_t="";var hupso_title_t="Собеседование по Java - исключения (exceptions) (вопросы и ответы)";</script><script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/share_toolbar.js.Без%20названия"></script><!-- Hupso Share Buttons --></div><div id="kento-pvc"><span class="kento-pvc-total"> 10011 Total Views </span> <span class="kento-pvc-today">20 Views Today </span></div><div class="post-views post-2006 entry-meta">
+			<span class="post-views-icon dashicons dashicons-visibility"></span>
+			<span class="post-views-label">Views: </span>
+			<span class="post-views-count">8&nbsp;151</span>
+			</div>	</div><!-- [ /.entry-body ] -->
+
+	
+	<div class="entry-meta-dataList"><dl><dt>Рубрики</dt><dd><a href="http://javastudy.ru/category/interview/">Interview</a></dd></dl></div>
+		
+<div id="comments" class="comments-area">
+
+	
+			<h5 class="comments-title">
+			Комментарии (3) для “<span>Собеседование по Java — исключения (exceptions) (вопросы и ответы)</span>”		</h5>
+
+		
+		<ol class="comment-list">
+					<li class="comment even thread-even depth-1 parent" id="comment-81">
+				<div id="div-comment-81" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt="" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/6d3ac86fdbef0dc685b5dda38d5c96d5" srcset="http://0.gravatar.com/avatar/6d3ac86fdbef0dc685b5dda38d5c96d5?s=64&amp;d=wavatar&amp;r=g 2x" class="avatar avatar-32 photo" height="32" width="32">			<cite class="fn">Grigoriy</cite><span class="says">:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://javastudy.ru/interview/exceptions/#comment-81">
+			03.02.2016 в 18:16</a>		</div>
+
+		<p>«Тема достаточно обширная для того, чтобы уместить ее в одном ответе. К примеру, можно разобрать примеры Головоча:&nbsp;http://habrahabr.ru/company/golovachcourses/blog/225585/»</p>
+<p>Фамилия Ивана — ГоловАч</p>
+
+		<div class="reply"><a rel="nofollow" class="comment-reply-login" href="http://javastudy.ru/wp-login.php?redirect_to=http%3A%2F%2Fjavastudy.ru%2Finterview%2Fexceptions%2F">Войдите, чтобы ответить</a></div>
+				</div>
+		<ol class="children">
+		<li class="comment byuser comment-author-venchik bypostauthor odd alt depth-2" id="comment-82">
+				<div id="div-comment-82" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt="" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/9bf16bd665dcd87732a91328c78ec5cc.png" srcset="http://0.gravatar.com/avatar/9bf16bd665dcd87732a91328c78ec5cc?s=64&amp;d=wavatar&amp;r=g 2x" class="avatar avatar-32 photo" height="32" width="32">			<cite class="fn">Nick V.</cite><span class="says">:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://javastudy.ru/interview/exceptions/#comment-82">
+			03.02.2016 в 21:14</a>		</div>
+
+		<p>fixed</p>
+
+		<div class="reply"><a rel="nofollow" class="comment-reply-login" href="http://javastudy.ru/wp-login.php?redirect_to=http%3A%2F%2Fjavastudy.ru%2Finterview%2Fexceptions%2F">Войдите, чтобы ответить</a></div>
+				</div>
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li class="comment even thread-odd thread-alt depth-1" id="comment-217">
+				<div id="div-comment-217" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt="" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/3f009d72559f51e7e454b16e5d0687a1" srcset="http://0.gravatar.com/avatar/3f009d72559f51e7e454b16e5d0687a1?s=64&amp;d=wavatar&amp;r=g 2x" class="avatar avatar-32 photo" height="32" width="32">			<cite class="fn">Backlaya</cite><span class="says">:</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="http://javastudy.ru/interview/exceptions/#comment-217">
+			13.06.2016 в 19:38</a>		</div>
+
+		<blockquote><p>&gt;Код в блоке <strong>finally</strong> будет выполнен <strong>всегда</strong></p></blockquote>
+<p><strong>Почти</strong> всегда. Код в finally не выполнится, если&nbsp;упала JVM или&nbsp;прервался поток, в котором он написан. Распространенный пример: в&nbsp;потоке А создали поток-демон Б, и А завершился раньше Б. В результате JVM просто убивает Б, и даже если в Б&nbsp;был написан finally, он не выполнится.</p>
+
+		<div class="reply"><a rel="nofollow" class="comment-reply-login" href="http://javastudy.ru/wp-login.php?redirect_to=http%3A%2F%2Fjavastudy.ru%2Finterview%2Fexceptions%2F">Войдите, чтобы ответить</a></div>
+				</div>
+		</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+		
+	
+	
+		<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Добавить комментарий <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://javastudy.ru/interview/exceptions/#respond" style="display:none;">Отменить ответ</a></small></h3><p class="must-log-in">Для отправки комментария вам необходимо <a href="http://javastudy.ru/wp-login.php?redirect_to=http%3A%2F%2Fjavastudy.ru%2Finterview%2Fexceptions%2F">авторизоваться</a>.</p>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+</article>
+
+<nav>
+  <ul class="pager">
+    <li class="previous"><a href="http://javastudy.ru/interview/java-oop3/" rel="prev">Собеседование по Java – ООП (вопросы и ответы). Часть 3</a></li>
+    <li class="next"><a href="http://javastudy.ru/interview/collections/" rel="next">Собеседование по Java — коллекции (Collections) (вопросы и ответы)</a></li>
+  </ul>
+</nav>
+</main>
+</div><!-- [ /.col-md-8 ] -->
+
+<div class="col-md-3 col-md-offset-1 site-sub subSection">
+<aside class="widget widget_search" id="search-4"><form role="search" method="get" id="searchform" class="searchform form-inline" action="http://javastudy.ru/">
+				<div>
+					<label class="screen-reader-text" for="s">Найти:</label>
+					<input type="text" value="" name="s" id="s" class="form-control form-group">
+					<input type="submit" id="searchsubmit" value="Поиск" class="btn btn-primary">
+				</div>
+			</form></aside><aside class="widget sfmsb_widget" id="sfmsb_settings-2"><div class="sfmsb-follow-social-buttons sfmsb-under sfmsb-circle 35 sfmsb-horizontal" data-hover="#dd3333"><h1 class="widget-title subSection-title">Подписывайтесь</h1><a target="_blank" href="https://twitter.com/java2study"><span class="sfmsb-icon-twitter sfmsb-circle" style="color:#1e73be;font-size:35px;" data-color="#1e73be"></span></a><a target="_blank" href="https://www.facebook.com/java2study"><span class="sfmsb-icon-facebook sfmsb-circle" style="color:#1e73be;font-size:35px;" data-color="#1e73be"></span></a><a target="_blank" href="https://vk.com/java2study"><span class="sfmsb-icon-vk sfmsb-circle" style="color:#1e73be;font-size:35px;" data-color="#1e73be"></span></a><div class="sfmsb-clearfix"></div></div></aside><aside class="widget widget_categories" id="categories-6"><h1 class="widget-title subSection-title">Разделы</h1>		<ul>
+	<li class="cat-item cat-item-124"><a href="http://javastudy.ru/category/angularjs/">AngularJS (11)</a>
+</li>
+	<li class="cat-item cat-item-128"><a href="http://javastudy.ru/category/database-tools/">database-tools (2)</a>
+</li>
+	<li class="cat-item cat-item-106"><a href="http://javastudy.ru/category/gwt/">GWT (8)</a>
+</li>
+	<li class="cat-item cat-item-50"><a href="http://javastudy.ru/category/hibernate/">Hibernate (11)</a>
+</li>
+	<li class="cat-item cat-item-116"><a href="http://javastudy.ru/category/interview/">Interview (27)</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="http://javastudy.ru/category/java/">java (1)</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://javastudy.ru/category/jsf-2/">JSF 2 (4)</a>
+<ul class="children">
+	<li class="cat-item cat-item-92"><a href="http://javastudy.ru/category/jsf-2/primefaces/">PrimeFaces (1)</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-115"><a href="http://javastudy.ru/category/junit/">jUnit (4)</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="http://javastudy.ru/category/log4j/">Log4j (1)</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://javastudy.ru/category/patterns/">Patterns (1)</a>
+</li>
+	<li class="cat-item cat-item-65"><a href="http://javastudy.ru/category/spring-data-jpa/">Spring Data JPA (16)</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://javastudy.ru/category/spring-mvc/">Spring MVC (36)</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://javastudy.ru/category/spring-security/">Spring Security (5)</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://javastudy.ru/category/spring-web-flow/">Spring Web Flow (20)</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="http://javastudy.ru/category/tools/">tools (1)</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://javastudy.ru/category/tutorials/">Tutorials (1)</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="http://javastudy.ru/category/web-services/">Web services (9)</a>
+</li>
+	<li class="cat-item cat-item-39"><a href="http://javastudy.ru/category/webapp/">webapp (3)</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://javastudy.ru/category/default/">Разное (1)</a>
+</li>
+		</ul>
+</aside><aside class="widget widget_text" id="text-8"><h1 class="widget-title subSection-title">Нашли ошибку?</h1>			<div class="textwidget"><img src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/mistake.png">
+Выделите и нажмите CTRL+ENTER :)</div>
+		</aside>
+
+<aside class="widget">
+<h1 class="subSection-title">Недавние записи</h1>
+<div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/database-tools/databene-benerator-generate-test-data/">Databene Benerator — автоматическая генерация тестовых данных</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;04.02.2017</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/webapp/oracle-connect-intellij-idea/">Подключение к базе данных Oracle из Intellij IDEA</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;04.02.2017</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/database-tools/flyway-start-maven-plugin/">Flyway — подключение, настройка библиотеки и плагина flyway-maven-plugin.</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;04.02.2017</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/junit/junit-listener/">JUnit Listener — добавление слушателей в юнит-тесты</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/junit/parameterized-test-junit/">Параметризированные тесты в JUnit. Использование @Parameterized.Parameters</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/junit/junit-suite-tests/">JUnit — Suite тест. Запуск нескольких тестов с помощью  аннотаций @Suite и @RunWith</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/junit/junit-hello-world/">JUnit — введение в юнит-тесты. Пример JUnit Hello world</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/web-services/ws-addressing-soap/">Включение адресации WS-Addressing в SOAP java веб-сервисе</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/web-services/validation-with-reflection/">Валидация данных веб-сервиса на стороне сервера с помощью reflection</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;02.07.2016</div>          
+	</div> 
+</div><div class="media">
+
+	
+	<div class="media-body">
+	<h4 class="media-heading"><a href="http://javastudy.ru/web-services/exceptions-soap-clientside/">Обработка ошибок в SOAP веб-сервисе на стороне клиента</a></h4>
+	<div><i class="fa fa-calendar"></i>&nbsp;23.06.2016</div>          
+	</div> 
+</div></aside>
+<!--
+<aside class="widget widget_categories">
+<nav class="localNav">
+<h1 class="subSection-title">Category</h1>
+<ul>
+  	<li class="cat-item cat-item-124"><a href="http://javastudy.ru/category/angularjs/" >AngularJS</a>
+</li>
+	<li class="cat-item cat-item-128"><a href="http://javastudy.ru/category/database-tools/" >database-tools</a>
+</li>
+	<li class="cat-item cat-item-106"><a href="http://javastudy.ru/category/gwt/" >GWT</a>
+</li>
+	<li class="cat-item cat-item-50"><a href="http://javastudy.ru/category/hibernate/" >Hibernate</a>
+</li>
+	<li class="cat-item cat-item-116"><a href="http://javastudy.ru/category/interview/" >Interview</a>
+</li>
+	<li class="cat-item cat-item-125"><a href="http://javastudy.ru/category/java/" >java</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://javastudy.ru/category/jsf-2/" >JSF 2</a>
+<ul class='children'>
+	<li class="cat-item cat-item-92"><a href="http://javastudy.ru/category/jsf-2/primefaces/" >PrimeFaces</a>
+</li>
+</ul>
+</li>
+	<li class="cat-item cat-item-115"><a href="http://javastudy.ru/category/junit/" >jUnit</a>
+</li>
+	<li class="cat-item cat-item-104"><a href="http://javastudy.ru/category/log4j/" >Log4j</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://javastudy.ru/category/patterns/" >Patterns</a>
+</li>
+	<li class="cat-item cat-item-65"><a href="http://javastudy.ru/category/spring-data-jpa/" >Spring Data JPA</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://javastudy.ru/category/spring-mvc/" >Spring MVC</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://javastudy.ru/category/spring-security/" >Spring Security</a>
+</li>
+	<li class="cat-item cat-item-22"><a href="http://javastudy.ru/category/spring-web-flow/" >Spring Web Flow</a>
+</li>
+	<li class="cat-item cat-item-87"><a href="http://javastudy.ru/category/tools/" >tools</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://javastudy.ru/category/tutorials/" >Tutorials</a>
+</li>
+	<li class="cat-item cat-item-126"><a href="http://javastudy.ru/category/web-services/" >Web services</a>
+</li>
+	<li class="cat-item cat-item-39"><a href="http://javastudy.ru/category/webapp/" >webapp</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://javastudy.ru/category/default/" >Разное</a>
+</li>
+ 
+</ul>
+</nav>
+</aside>
+
+<aside class="widget widget_archive">
+<nav class="localNav">
+<h1 class="subSection-title">Archive</h1>
+<ul>
+  	<li><a href='http://javastudy.ru/2017/02/'>Февраль 2017</a></li>
+	<li><a href='http://javastudy.ru/2016/07/'>Июль 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/06/'>Июнь 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/05/'>Май 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/04/'>Апрель 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/03/'>Март 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/02/'>Февраль 2016</a></li>
+	<li><a href='http://javastudy.ru/2016/01/'>Январь 2016</a></li>
+	<li><a href='http://javastudy.ru/2015/11/'>Ноябрь 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/10/'>Октябрь 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/09/'>Сентябрь 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/08/'>Август 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/07/'>Июль 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/06/'>Июнь 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/05/'>Май 2015</a></li>
+	<li><a href='http://javastudy.ru/2015/04/'>Апрель 2015</a></li>
+</ul>
+</nav>
+</aside>
+-->
+
+</div><!-- [ /.site-sub ] -->
+
+</div><!-- [ /.row ] -->
+</div><!-- [ /.container ] -->
+</div><!-- [ /.siteContent ] -->
+<!-- [ /.row ] -->
+<!-- [ /.container ] -->
+<!-- [ /.siteContent ] -->
+
+
+<span class="catFooterIcon"></span>
+<footer class="section">
+    <div class="footerMenu">
+       <div class="container">
+            <nav class="menu-footer-menu-cut-version-container"><ul id="menu-footer-menu-cut-version" class="menu nav nav-pills"><li id="menu-item-2135" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-has-children menu-item-2135"><a href="http://javastudy.ru/main-page/">JavaStudy.ru</a>
+<ul class="sub-menu">
+	<li id="menu-item-2114" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2114"><a href="http://javastudy.ru/about/">About</a></li>
+	<li id="menu-item-2115" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2115"><a href="http://javastudy.ru/advertising/">Advertising</a></li>
+	<li id="menu-item-2117" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2117"><a href="http://javastudy.ru/contact-us/">Contacts</a></li>
+	<li id="menu-item-2138" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2138"><a href="http://javastudy.ru/sitemap/">Sitemap</a></li>
+</ul>
+</li>
+<li id="menu-item-2118" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2118"><a href="http://javastudy.ru/frameworks/">Frameworks</a>
+<ul class="sub-menu">
+	<li id="menu-item-2119" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2119"><a href="http://javastudy.ru/frameworks/gwt/">GWT</a></li>
+	<li id="menu-item-2120" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2120"><a href="http://javastudy.ru/frameworks/hibernate/">Hibernate</a></li>
+	<li id="menu-item-2121" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2121"><a href="http://javastudy.ru/frameworks/jsf-2-0/">JSF 2.0</a></li>
+	<li id="menu-item-2122" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2122"><a href="http://javastudy.ru/frameworks/spring/">Spring</a></li>
+	<li id="menu-item-2128" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2128"><a href="http://javastudy.ru/frameworks/unit-test/">Unit Test</a></li>
+</ul>
+</li>
+<li id="menu-item-2136" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2136"><a href="http://javastudy.ru/reference/">Reference</a>
+<ul class="sub-menu">
+	<li id="menu-item-2137" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2137"><a href="http://javastudy.ru/reference/interview/">Interview</a></li>
+	<li id="menu-item-3466" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3466"><a href="http://javastudy.ru/reference/books/">Books</a></li>
+</ul>
+</li>
+<li id="menu-item-2139" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-2139"><a href="http://javastudy.ru/tools/">Tools</a>
+<ul class="sub-menu">
+	<li id="menu-item-4008" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4008"><a href="http://javastudy.ru/tools/database-tools/">Database tools</a></li>
+	<li id="menu-item-2140" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2140"><a href="http://javastudy.ru/tools/apache-maven/">Apache Maven</a></li>
+	<li id="menu-item-2142" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2142"><a href="http://javastudy.ru/tools/log4j/">Log4j 2</a></li>
+	<li id="menu-item-2141" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2141"><a href="http://javastudy.ru/tools/jquery/">jQuery</a></li>
+</ul>
+</li>
+</ul></nav>        </div>
+    </div>
+<!-- widgets in footer before Javstudy copyright 
+    <div class="container sectionBox">
+        <div class="row ">
+            <div class="col-md-4"></div><div class="col-md-4"></div><div class="col-md-4"></div>        </div>
+    </div> -->
+    <div class="sectionBox copySection">
+        <div class="row">
+            <div class="col-md-12 text-center">
+            Javastudy.ru © 2017 - При любом использовании материала, пожалуйста, указывайте ссылку на данный ресурс:)
+            </div>
+        </div>
+    </div>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter29931504 = new Ya.Metrika({
+                    id:29931504,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true,
+                    trackHash:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/29931504" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<!--Google -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46291807-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!--End Google-->
+
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+<div class="scroll-back-to-top-wrapper show">
+	<span class="scroll-back-to-top-inner">
+					<i class="fa fa-2x fa-angle-double-up"></i>
+			</span>
+</div><div id="su-footer-links" style="text-align: center;"></div><!-- Lightbox Plus Colorbox v2.7.2/1.5.9 - 2013.01.24 - Message: 0-->
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  $("a[rel*=lightbox]").colorbox({initialWidth:"30%",initialHeight:"30%",maxWidth:"90%",maxHeight:"90%",opacity:0.8});
+});
+</script>
+<link rel="stylesheet" id="buttons-css" href="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/buttons.min.css" type="text/css" media="all">
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/core.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/datepicker.min.js.Без%20названия"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(jQuery){jQuery.datepicker.setDefaults({"closeText":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","currentText":"\u0421\u0435\u0433\u043e\u0434\u043d\u044f","monthNames":["\u042f\u043d\u0432\u0430\u0440\u044c","\u0424\u0435\u0432\u0440\u0430\u043b\u044c","\u041c\u0430\u0440\u0442","\u0410\u043f\u0440\u0435\u043b\u044c","\u041c\u0430\u0439","\u0418\u044e\u043d\u044c","\u0418\u044e\u043b\u044c","\u0410\u0432\u0433\u0443\u0441\u0442","\u0421\u0435\u043d\u0442\u044f\u0431\u0440\u044c","\u041e\u043a\u0442\u044f\u0431\u0440\u044c","\u041d\u043e\u044f\u0431\u0440\u044c","\u0414\u0435\u043a\u0430\u0431\u0440\u044c"],"monthNamesShort":["\u042f\u043d\u0432","\u0424\u0435\u0432","\u041c\u0430\u0440","\u0410\u043f\u0440","\u041c\u0430\u0439","\u0418\u044e\u043d","\u0418\u044e\u043b","\u0410\u0432\u0433","\u0421\u0435\u043d","\u041e\u043a\u0442","\u041d\u043e\u044f","\u0414\u0435\u043a"],"nextText":"\u0414\u0430\u043b\u0435\u0435","prevText":"\u041d\u0430\u0437\u0430\u0434","dayNames":["\u0412\u043e\u0441\u043a\u0440\u0435\u0441\u0435\u043d\u044c\u0435","\u041f\u043e\u043d\u0435\u0434\u0435\u043b\u044c\u043d\u0438\u043a","\u0412\u0442\u043e\u0440\u043d\u0438\u043a","\u0421\u0440\u0435\u0434\u0430","\u0427\u0435\u0442\u0432\u0435\u0440\u0433","\u041f\u044f\u0442\u043d\u0438\u0446\u0430","\u0421\u0443\u0431\u0431\u043e\u0442\u0430"],"dayNamesShort":["\u0412\u0441","\u041f\u043d","\u0412\u0442","\u0421\u0440","\u0427\u0442","\u041f\u0442","\u0421\u0431"],"dayNamesMin":["\u0412\u0441","\u041f\u043d","\u0412\u0442","\u0421\u0440","\u0427\u0442","\u041f\u0442","\u0421\u0431"],"dateFormat":"dd.mm.yy","firstDay":1,"isRTL":false});});
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpcf7 = {"apiSettings":{"root":"http:\/\/javastudy.ru\/wp-json\/contact-form-7\/v1","namespace":"contact-form-7\/v1"},"recaptcha":{"messages":{"empty":"\u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u043e\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u0435, \u0447\u0442\u043e \u0432\u044b \u043d\u0435 \u0440\u043e\u0431\u043e\u0442."}},"cached":"1"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/scripts.js.Без%20названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var scrollBackToTop = {"scrollDuration":"300","fadeDuration":"0.3"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/scroll-back-to-top.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/comment-reply.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/jquery.colorbox.1.5.9-min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/wp-embed.min.js.Без%20названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var userSettings = {"url":"\/","uid":"0","time":"1541759193","secure":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/utils.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/editor.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/wp-a11y.min.js.Без%20названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var wpLinkL10n = {"title":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0441\u0441\u044b\u043b\u043a\u0443","update":"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c","save":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0441\u0441\u044b\u043b\u043a\u0443","noTitle":"(\u0431\u0435\u0437 \u043d\u0430\u0437\u0432\u0430\u043d\u0438\u044f)","noMatchesFound":"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e.","linkSelected":"\u0421\u0441\u044b\u043b\u043a\u0430 \u0432\u044b\u0431\u0440\u0430\u043d\u0430.","linkInserted":"\u0421\u0441\u044b\u043b\u043a\u0430 \u0432\u0441\u0442\u0430\u0432\u043b\u0435\u043d\u0430."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/wplink.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/widget.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/position.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/menu.min.js.Без%20названия"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var uiAutocompleteL10n = {"noResults":"\u0420\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e.","oneResult":"\u041d\u0430\u0439\u0434\u0435\u043d 1 \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442. \u0414\u043b\u044f \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 \u0432\u0432\u0435\u0440\u0445\/\u0432\u043d\u0438\u0437.","manyResults":"\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u043e\u0432: %d. \u0414\u043b\u044f \u043f\u0435\u0440\u0435\u043c\u0435\u0449\u0435\u043d\u0438\u044f \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 \u0432\u0432\u0435\u0440\u0445\/\u0432\u043d\u0438\u0437.","itemSelected":"\u041e\u0431\u044a\u0435\u043a\u0442 \u0432\u044b\u0431\u0440\u0430\u043d."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/autocomplete.min.js.Без%20названия"></script>
+
+		<script type="text/javascript">
+		tinyMCEPreInit = {
+			baseURL: "http://javastudy.ru/wp-includes/js/tinymce",
+			suffix: ".min",
+						mceInit: {'comment':{theme:"modern",skin:"lightgray",language:"ru",formats:{alignleft: [{selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"left"}},{selector: "img,table,dl.wp-caption", classes: "alignleft"}],aligncenter: [{selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"center"}},{selector: "img,table,dl.wp-caption", classes: "aligncenter"}],alignright: [{selector: "p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li", styles: {textAlign:"right"}},{selector: "img,table,dl.wp-caption", classes: "alignright"}],strikethrough: {inline: "del"}},relative_urls:false,remove_script_host:false,convert_urls:false,browser_spellcheck:true,fix_list_elements:true,entities:"38,amp,60,lt,62,gt",entity_encoding:"raw",keep_styles:false,cache_suffix:"wp-mce-4800-20180716-tadv-4.7.13",resize:"vertical",menubar:true,branding:false,preview_styles:"font-family font-size font-weight font-style text-decoration text-transform",end_container_on_empty_block:true,wpeditimage_html5_captions:true,wp_lang_attr:"ru-RU",wp_keep_scroll_position:false,wp_shortcut_labels:{"Heading 1":"access1","Heading 2":"access2","Heading 3":"access3","Heading 4":"access4","Heading 5":"access5","Heading 6":"access6","Paragraph":"access7","Blockquote":"accessQ","Underline":"metaU","Strikethrough":"accessD","Bold":"metaB","Italic":"metaI","Code":"accessX","Align center":"accessC","Align right":"accessR","Align left":"accessL","Justify":"accessJ","Cut":"metaX","Copy":"metaC","Paste":"metaV","Select all":"metaA","Undo":"metaZ","Redo":"metaY","Bullet list":"accessU","Numbered list":"accessO","Insert\/edit image":"accessM","Remove link":"accessS","Toolbar Toggle":"accessZ","Insert Read More tag":"accessT","Insert Page Break tag":"accessP","Distraction-free writing mode":"accessW","Keyboard Shortcuts":"accessH"},content_css:"http://javastudy.ru/wp-includes/css/dashicons.min.css?ver=4.9.8,http://javastudy.ru/wp-includes/js/tinymce/skins/wordpress/wp-content.css?ver=4.9.8",plugins:"charmap,colorpicker,hr,lists,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpautoresize,wpeditimage,wpemoji,wpgallery,wplink,wpdialogs,wptextpattern,wpview,image",external_plugins:{"crayon_tinymce":"http:\/\/javastudy.ru\/wp-content\/plugins\/crayon-syntax-highlighter\/util\/tag-editor\/crayon_tinymce.js","anchor":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/anchor\/plugin.min.js","code":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/code\/plugin.min.js","insertdatetime":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/insertdatetime\/plugin.min.js","nonbreaking":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/nonbreaking\/plugin.min.js","print":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/print\/plugin.min.js","searchreplace":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/searchreplace\/plugin.min.js","table":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/table\/plugin.min.js","visualblocks":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/visualblocks\/plugin.min.js","visualchars":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/visualchars\/plugin.min.js","emoticons":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/emoticons\/plugin.min.js","advlist":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/advlist\/plugin.min.js","wptadv":"http:\/\/javastudy.ru\/wp-content\/plugins\/tinymce-advanced\/mce\/wptadv\/plugin.min.js"},selector:"#comment",wpautop:true,indent:false,toolbar1:"bold,italic,blockquote,bullist,numlist,alignleft,aligncenter,alignright,link,unlink,table,fullscreen,undo,redo,wp_adv,spellchecker,separator,crayon_tinymce",toolbar2:"formatselect,alignjustify,strikethrough,outdent,indent,pastetext,removeformat,charmap,wp_more,emoticons,forecolor,wp_help",toolbar3:"",toolbar4:"",tabfocus_elements:":prev,:next",body_class:"comment post-type-post post-status-publish post-format-standard page-template-default locale-ru-ru",image_advtab:true,rel_list:[{text: "None", value: ""}, {text: "Nofollow", value: "nofollow"}],table_toolbar:false,extended_valid_elements:",pre[*],code[*],iframe[*]"}},
+			qtInit: {'comment':{id:"comment",buttons:"strong,em,link,block,del,ins,img,ul,ol,li,code,more,close"}},
+			ref: {plugins:"charmap,colorpicker,hr,lists,media,paste,tabfocus,textcolor,fullscreen,wordpress,wpautoresize,wpeditimage,wpemoji,wpgallery,wplink,wpdialogs,wptextpattern,wpview,image",theme:"modern",language:"ru"},
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
+		};
+		</script>
+		<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/tinymce.min.js.Без%20названия"></script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/plugin.min.js.Без%20названия"></script>
+<script type="text/javascript">
+tinymce.addI18n( 'ru', {"New document":"\u041d\u043e\u0432\u044b\u0439 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442","Formats":"\u0424\u043e\u0440\u043c\u0430\u0442\u044b","Headings":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0438","Heading 1":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 1","Heading 2":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 2","Heading 3":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 3","Heading 4":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 4","Heading 5":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 5","Heading 6":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a 6","Blocks":"\u0411\u043b\u043e\u043a\u0438","Paragraph":"\u0410\u0431\u0437\u0430\u0446","Blockquote":"\u0426\u0438\u0442\u0430\u0442\u0430","Div":"\u0421\u043b\u043e\u0439","Pre":"\u041e\u0442\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439","Preformatted":"\u041e\u0442\u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439","Address":"\u0410\u0434\u0440\u0435\u0441","Inline":"\u0421\u0442\u0440\u043e\u043a\u0438","Underline":"\u041f\u043e\u0434\u0447\u0451\u0440\u043a\u043d\u0443\u0442\u044b\u0439","Strikethrough":"\u041f\u0435\u0440\u0435\u0447\u0451\u0440\u043a\u043d\u0443\u0442\u044b\u0439","Subscript":"\u041d\u0438\u0436\u043d\u0438\u0439 \u0438\u043d\u0434\u0435\u043a\u0441","Superscript":"\u0412\u0435\u0440\u0445\u043d\u0438\u0439 \u0438\u043d\u0434\u0435\u043a\u0441","Clear formatting":"\u041e\u0447\u0438\u0441\u0442\u0438\u0442\u044c \u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435","Bold":"\u0416\u0438\u0440\u043d\u044b\u0439","Italic":"\u041a\u0443\u0440\u0441\u0438\u0432","Code":"\u041a\u043e\u0434","Source code":"\u0418\u0441\u0445\u043e\u0434\u043d\u044b\u0439 \u043a\u043e\u0434","Font Family":"\u0421\u0435\u043c\u0435\u0439\u0441\u0442\u0432\u043e \u0448\u0440\u0438\u0444\u0442\u043e\u0432","Font Sizes":"\u0420\u0430\u0437\u043c\u0435\u0440\u044b \u0448\u0440\u0438\u0444\u0442\u043e\u0432","Align center":"\u041f\u043e \u0446\u0435\u043d\u0442\u0440\u0443","Align right":"\u041f\u043e \u043f\u0440\u0430\u0432\u043e\u043c\u0443 \u043a\u0440\u0430\u044e","Align left":"\u041f\u043e \u043b\u0435\u0432\u043e\u043c\u0443 \u043a\u0440\u0430\u044e","Justify":"\u041f\u043e \u0448\u0438\u0440\u0438\u043d\u0435","Increase indent":"\u0423\u0432\u0435\u043b\u0438\u0447\u0438\u0442\u044c \u043e\u0442\u0441\u0442\u0443\u043f","Decrease indent":"\u0423\u043c\u0435\u043d\u044c\u0448\u0438\u0442\u044c \u043e\u0442\u0441\u0442\u0443\u043f","Cut":"\u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c","Copy":"\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c","Paste":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c","Select all":"\u0412\u044b\u0434\u0435\u043b\u0438\u0442\u044c \u0432\u0441\u0451","Undo":"\u041e\u0442\u043c\u0435\u043d\u0438\u0442\u044c","Redo":"\u041f\u043e\u0432\u0442\u043e\u0440\u0438\u0442\u044c","Ok":"OK","Cancel":"\u041e\u0442\u043c\u0435\u043d\u0430","Close":"\u0417\u0430\u043a\u0440\u044b\u0442\u044c","Visual aids":"\u0412\u0438\u0437\u0443\u0430\u043b\u044c\u043d\u044b\u0435 \u043f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0438","Bullet list":"\u041c\u0430\u0440\u043a\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a","Numbered list":"\u041d\u0443\u043c\u0435\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0441\u043f\u0438\u0441\u043e\u043a","Square":"\u041a\u0432\u0430\u0434\u0440\u0430\u0442","Default":"\u041f\u043e \u0443\u043c\u043e\u043b\u0447\u0430\u043d\u0438\u044e","Circle":"\u041a\u0440\u0443\u0436\u043e\u043a","Disc":"\u0422\u043e\u0447\u043a\u0430","Lower Greek":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 \u0433\u0440\u0435\u0447\u0435\u0441\u043a\u0438\u0435 \u0431\u0443\u043a\u0432\u044b","Lower Alpha":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 \u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0438\u0435 \u0431\u0443\u043a\u0432\u044b","Upper Alpha":"\u0417\u0430\u0433\u043b\u0430\u0432\u043d\u044b\u0435 \u043b\u0430\u0442\u0438\u043d\u0441\u043a\u0438\u0435 \u0431\u0443\u043a\u0432\u044b","Upper Roman":"\u0417\u0430\u0433\u043b\u0430\u0432\u043d\u044b\u0435 \u0440\u0438\u043c\u0441\u043a\u0438\u0435 \u0431\u0443\u043a\u0432\u044b","Lower Roman":"\u0421\u0442\u0440\u043e\u0447\u043d\u044b\u0435 \u0440\u0438\u043c\u0441\u043a\u0438\u0435 \u0431\u0443\u043a\u0432\u044b","Name":"\u0418\u043c\u044f","Anchor":"\u042f\u043a\u043e\u0440\u044c","Anchors":"\u042f\u043a\u043e\u0440\u044f","Id should start with a letter, followed only by letters, numbers, dashes, dots, colons or underscores.":"Id \u0434\u043e\u043b\u0436\u0435\u043d \u043d\u0430\u0447\u0438\u043d\u0430\u0442\u044c\u0441\u044f \u0441 \u0431\u0443\u043a\u0432\u044b, \u0438 \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0442\u044c \u0442\u043e\u043b\u044c\u043a\u043e \u0431\u0443\u043a\u0432\u044b, \u0446\u0438\u0444\u0440\u044b, \u0442\u0438\u0440\u0435, \u0442\u043e\u0447\u043a\u0438, \u0437\u0430\u043f\u044f\u0442\u044b\u0435 \u0438\u043b\u0438 \u0437\u043d\u0430\u043a \u043f\u043e\u0434\u0447\u0435\u0440\u043a\u0438\u0432\u0430\u043d\u0438\u044f.","Document properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430","Robots":"\u0420\u043e\u0431\u043e\u0442\u044b","Title":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a","Keywords":"\u041a\u043b\u044e\u0447\u0435\u0432\u044b\u0435 \u0441\u043b\u043e\u0432\u0430","Encoding":"\u041a\u043e\u0434\u0438\u0440\u043e\u0432\u043a\u0430","Description":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435","Author":"\u0410\u0432\u0442\u043e\u0440","Image":"\u0418\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","Insert\/edit image":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u043a\u0430\u0440\u0442\u0438\u043d\u043a\u0443","General":"\u041e\u0431\u0449\u0438\u0435","Advanced":"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e","Source":"\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a","Border":"\u0420\u0430\u043c\u043a\u0430","Constrain proportions":"\u0421\u043e\u0445\u0440\u0430\u043d\u044f\u0442\u044c \u043f\u0440\u043e\u043f\u043e\u0440\u0446\u0438\u0438","Vertical space":"\u041e\u0442\u0441\u0442\u0443\u043f (V)","Image description":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435","Style":"\u0421\u0442\u0438\u043b\u044c","Dimensions":"\u0420\u0430\u0437\u043c\u0435\u0440\u044b","Insert image":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435","Date\/time":"\u0414\u0430\u0442\u0430\/\u0432\u0440\u0435\u043c\u044f","Insert date\/time":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0434\u0430\u0442\u0443\/\u0432\u0440\u0435\u043c\u044f","Table of Contents":"\u041e\u0433\u043b\u0430\u0432\u043b\u0435\u043d\u0438\u0435","Insert\/Edit code sample":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0444\u0440\u0430\u0433\u043c\u0435\u043d\u0442 \u043a\u043e\u0434\u0430","Language":"\u042f\u0437\u044b\u043a","Media":"\u041c\u0435\u0434\u0438\u0430\u0444\u0430\u0439\u043b\u044b","Insert\/edit media":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u043c\u0435\u0434\u0438\u0430","Poster":"\u041f\u043e\u0441\u0442\u0435\u0440","Alternative source":"\u0410\u043b\u044c\u0442\u0435\u0440\u043d\u0430\u0442\u0438\u0432\u043d\u044b\u0439 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a","Paste your embed code below:":"\u0412\u0441\u0442\u0430\u0432\u044c\u0442\u0435 \u043a\u043e\u0434 \u043e\u0431\u044a\u0435\u043a\u0442\u0430:","Insert video":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0432\u0438\u0434\u0435\u043e\u0444\u0430\u0439\u043b","Embed":"\u041e\u0431\u044a\u0435\u043a\u0442","Special character":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 \u0441\u0438\u043c\u0432\u043e\u043b","Right to left":"\u0421\u043f\u0440\u0430\u0432\u0430 \u043d\u0430\u043b\u0435\u0432\u043e","Left to right":"\u0421\u043b\u0435\u0432\u0430 \u043d\u0430\u043f\u0440\u0430\u0432\u043e","Emoticons":"\u0418\u043a\u043e\u043d\u043a\u0438 Emoticons","Nonbreaking space":"\u041d\u0435\u0440\u0430\u0437\u0440\u044b\u0432\u043d\u044b\u0439 \u043f\u0440\u043e\u0431\u0435\u043b","Page break":"\u0420\u0430\u0437\u0440\u044b\u0432 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b","Paste as text":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u043a\u0430\u043a \u0442\u0435\u043a\u0441\u0442","Preview":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440\u0435\u0442\u044c","Print":"\u041f\u0435\u0447\u0430\u0442\u044c","Save":"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c","Fullscreen":"\u041d\u0430 \u0432\u0435\u0441\u044c \u044d\u043a\u0440\u0430\u043d","Horizontal line":"\u0413\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b\u044c\u043d\u0430\u044f \u043b\u0438\u043d\u0438\u044f","Horizontal space":"\u041e\u0442\u0441\u0442\u0443\u043f (H)","Restore last draft":"\u0412\u043e\u0441\u0441\u0442\u0430\u043d\u043e\u0432\u0438\u0442\u044c \u043f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0439 \u0447\u0435\u0440\u043d\u043e\u0432\u0438\u043a","Insert\/edit link":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c\/\u0438\u0437\u043c\u0435\u043d\u0438\u0442\u044c \u0441\u0441\u044b\u043b\u043a\u0443","Remove link":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0441\u044b\u043b\u043a\u0443","Link":"\u0421\u0441\u044b\u043b\u043a\u0430","Insert link":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0441\u044b\u043b\u043a\u0443","Target":"\u0426\u0435\u043b\u044c","New window":"\u041d\u043e\u0432\u043e\u0435 \u043e\u043a\u043d\u043e","Text to display":"\u041f\u043e\u043a\u0430\u0437\u044b\u0432\u0430\u0435\u043c\u044b\u0439 \u0442\u0435\u043a\u0441\u0442","Url":"URL","The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?":"\u0412\u0432\u0435\u0434\u0451\u043d\u043d\u044b\u0439 \u0432\u0430\u043c\u0438 \u0430\u0434\u0440\u0435\u0441 \u043f\u043e\u0445\u043e\u0436 \u043d\u0430 e-mail, \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c mailto: \u0432 \u043d\u0430\u0447\u0430\u043b\u043e?","The URL you entered seems to be an external link. Do you want to add the required http:\/\/ prefix?":"\u0412\u0432\u0435\u0434\u0451\u043d\u043d\u044b\u0439 \u0432\u0430\u043c\u0438 \u0430\u0434\u0440\u0435\u0441 \u043f\u043e\u0445\u043e\u0436 \u043d\u0430 \u0432\u043d\u0435\u0448\u043d\u044e\u044e \u0441\u0441\u044b\u043b\u043a\u0443, \u0434\u043e\u0431\u0430\u0432\u0438\u0442\u044c http:\/\/ \u0432 \u043d\u0430\u0447\u0430\u043b\u043e?","Color":"\u0426\u0432\u0435\u0442","Custom color":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439 \u0446\u0432\u0435\u0442","Custom...":"\u041f\u0440\u043e\u0438\u0437\u0432\u043e\u043b\u044c\u043d\u044b\u0439...","No color":"\u0411\u0435\u0437 \u0446\u0432\u0435\u0442\u0430","Could not find the specified string.":"\u041d\u0435 \u0443\u0434\u0430\u043b\u043e\u0441\u044c \u043d\u0430\u0439\u0442\u0438 \u0443\u043a\u0430\u0437\u0430\u043d\u043d\u0443\u044e \u0441\u0442\u0440\u043e\u043a\u0443.","Replace":"\u0417\u0430\u043c\u0435\u043d\u0438\u0442\u044c","Next":"\u0414\u0430\u043b\u0435\u0435","Prev":"\u041d\u0430\u0437\u0430\u0434","Whole words":"\u0426\u0435\u043b\u044b\u0435 \u0441\u043b\u043e\u0432\u0430","Find and replace":"\u041d\u0430\u0439\u0442\u0438 \u0438 \u0437\u0430\u043c\u0435\u043d\u0438\u0442\u044c","Replace with":"\u0417\u0430\u043c\u0435\u043d\u0430","Find":"\u041d\u0430\u0439\u0442\u0438","Replace all":"\u0417\u0430\u043c\u0435\u043d\u0438\u0442\u044c \u0432\u0441\u0435","Match case":"\u0421 \u0443\u0447\u0451\u0442\u043e\u043c \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430","Spellcheck":"\u041f\u0440\u043e\u0432\u0435\u0440\u043a\u0430 \u043e\u0440\u0444\u043e\u0433\u0440\u0430\u0444\u0438\u0438","Finish":"\u0417\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044c","Ignore all":"\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c \u0432\u0441\u0435","Ignore":"\u041f\u0440\u043e\u043f\u0443\u0441\u0442\u0438\u0442\u044c","Add to Dictionary":"\u0414\u043e\u0431\u0430\u0432\u0438\u0442\u044c \u0432 \u0441\u043b\u043e\u0432\u0430\u0440\u044c","Insert table":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0442\u0430\u0431\u043b\u0438\u0446\u0443","Delete table":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0442\u0430\u0431\u043b\u0438\u0446\u0443","Table properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Row properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 \u0441\u0442\u0440\u043e\u043a\u0438 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Cell properties":"\u0421\u0432\u043e\u0439\u0441\u0442\u0432\u0430 \u044f\u0447\u0435\u0439\u043a\u0438 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Border color":"\u0426\u0432\u0435\u0442 \u0433\u0440\u0430\u043d\u0438\u0446\u044b","Row":"\u0421\u0442\u0440\u043e\u043a\u0430","Rows":"\u0421\u0442\u0440\u043e\u043a\u0438","Column":"\u0421\u0442\u043e\u043b\u0431\u0435\u0446","Cols":"\u0421\u0442\u043e\u043b\u0431\u0446\u044b","Cell":"\u042f\u0447\u0435\u0439\u043a\u0430","Header cell":"\u042f\u0447\u0435\u0439\u043a\u0430 \u0437\u0430\u0433\u043e\u043b\u043e\u0432\u043a\u0430","Header":"\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a","Body":"\u041e\u0441\u043d\u043e\u0432\u043d\u0430\u044f \u0447\u0430\u0441\u0442\u044c","Footer":"\u041d\u0438\u0436\u043d\u044f\u044f \u0447\u0430\u0441\u0442\u044c","Insert row before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u0434\u043e","Insert row after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u043f\u043e\u0441\u043b\u0435","Insert column before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u043e\u043b\u0431\u0435\u0446 \u0434\u043e","Insert column after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u043e\u043b\u0431\u0435\u0446 \u043f\u043e\u0441\u043b\u0435","Paste row before":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u0442\u0430\u0431\u043b\u0438\u0446\u044b \u0434\u043e","Paste row after":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u0442\u0430\u0431\u043b\u0438\u0446\u044b \u043f\u043e\u0441\u043b\u0435","Delete row":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443","Delete column":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c \u0441\u0442\u043e\u043b\u0431\u0435\u0446","Cut row":"\u0412\u044b\u0440\u0435\u0437\u0430\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Copy row":"\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0441\u0442\u0440\u043e\u043a\u0443 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Merge cells":"\u041e\u0431\u044a\u0435\u0434\u0438\u043d\u0438\u0442\u044c \u044f\u0447\u0435\u0439\u043a\u0438 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Split cell":"\u0420\u0430\u0437\u0434\u0435\u043b\u0438\u0442\u044c \u044f\u0447\u0435\u0439\u043a\u0443 \u0442\u0430\u0431\u043b\u0438\u0446\u044b","Height":"\u0412\u044b\u0441\u043e\u0442\u0430","Width":"\u0428\u0438\u0440\u0438\u043d\u0430","Caption":"\u041f\u043e\u0434\u043f\u0438\u0441\u044c","Alignment":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435","H Align":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435 \u043f\u043e \u0433\u043e\u0440\u0438\u0437\u043e\u043d\u0442\u0430\u043b\u0438","Left":"\u0421\u043b\u0435\u0432\u0430","Center":"\u041f\u043e \u0446\u0435\u043d\u0442\u0440\u0443","Right":"\u0421\u043f\u0440\u0430\u0432\u0430","None":"\u041d\u0435\u0442","V Align":"\u0412\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u0435 \u043f\u043e \u0432\u0435\u0440\u0442\u0438\u043a\u0430\u043b\u0438","Top":"\u0421\u0432\u0435\u0440\u0445\u0443","Middle":"\u041f\u043e\u0441\u0435\u0440\u0435\u0434\u0438\u043d\u0435","Bottom":"\u0421\u043d\u0438\u0437\u0443","Row group":"\u0413\u0440\u0443\u043f\u043f\u0430 \u0441\u0442\u0440\u043e\u043a","Column group":"\u0413\u0440\u0443\u043f\u043f\u0430 \u0441\u0442\u043e\u043b\u0431\u0446\u043e\u0432","Row type":"\u0422\u0438\u043f \u0441\u0442\u0440\u043e\u043a\u0438","Cell type":"\u0422\u0438\u043f \u044f\u0447\u0435\u0439\u043a\u0438","Cell padding":"\u041e\u0442\u0441\u0442\u0443\u043f\u044b \u0432 \u044f\u0447\u0435\u0439\u043a\u0430\u0445","Cell spacing":"\u041e\u0442\u0441\u0442\u0443\u043f\u044b \u043c\u0435\u0436\u0434\u0443 \u044f\u0447\u0435\u0439\u043a\u0430\u043c\u0438","Scope":"\u0410\u0442\u0440\u0438\u0431\u0443\u0442 scope","Insert template":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0448\u0430\u0431\u043b\u043e\u043d","Templates":"\u0428\u0430\u0431\u043b\u043e\u043d\u044b","Background color":"\u0426\u0432\u0435\u0442 \u0444\u043e\u043d\u0430","Text color":"\u0426\u0432\u0435\u0442 \u0442\u0435\u043a\u0441\u0442\u0430","Show blocks":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c \u0431\u043b\u043e\u043a\u0438","Show invisible characters":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c \u043d\u0435\u0432\u0438\u0434\u0438\u043c\u044b\u0435 \u0441\u0438\u043c\u0432\u043e\u043b\u044b","Words: {0}":"\u0421\u043b\u043e\u0432: {0}","Paste is now in plain text mode. Contents will now be pasted as plain text until you toggle this option off.":"\u0412\u044b\u0431\u0440\u0430\u043d \u0440\u0435\u0436\u0438\u043c \u0432\u0441\u0442\u0430\u0432\u043a\u0438 \u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e \u0442\u0435\u043a\u0441\u0442\u0430. \u0421\u043e\u0434\u0435\u0440\u0436\u0438\u043c\u043e\u0435 \u0431\u0443\u0434\u0435\u0442 \u0432\u0441\u0442\u0430\u0432\u043b\u044f\u0442\u044c\u0441\u044f \u0432 \u0432\u0438\u0434\u0435 \u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e \u0442\u0435\u043a\u0441\u0442\u0430, \u043f\u043e\u043a\u0430 \u0432\u044b \u043d\u0435 \u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u0435 \u044d\u0442\u043e\u0442 \u0440\u0435\u0436\u0438\u043c.\n\n\u0415\u0441\u043b\u0438 \u0432\u044b \u0445\u043e\u0442\u0438\u0442\u0435 \u0432\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0442\u0435\u043a\u0441\u0442 \u0441 \u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435\u043c \u0438\u0437 Microsoft Word, \u043f\u043e\u043f\u0440\u043e\u0431\u0443\u0439\u0442\u0435 \u043e\u0442\u043a\u043b\u044e\u0447\u0438\u0442\u044c \u044d\u0442\u043e\u0442 \u0440\u0435\u0436\u0438\u043c. \u0420\u0435\u0434\u0430\u043a\u0442\u043e\u0440 \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0438 \u043e\u0447\u0438\u0441\u0442\u0438\u0442 \u0442\u0435\u043a\u0441\u0442, \u0441\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0439 \u0438\u0437 Word.","Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help":"\u041e\u0431\u043b\u0430\u0441\u0442\u044c \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Alt-Shift-H, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0435 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438.","Rich Text Area. Press Control-Option-H for help.":"\u041e\u0431\u043b\u0430\u0441\u0442\u044c \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Control-Option-H, \u0447\u0442\u043e\u0431\u044b \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0431\u043e\u043b\u044c\u0448\u0435 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438.","You have unsaved changes are you sure you want to navigate away?":"\u0421\u0434\u0435\u043b\u0430\u043d\u043d\u044b\u0435 \u0432\u0430\u043c\u0438 \u0438\u0437\u043c\u0435\u043d\u0435\u043d\u0438\u044f \u0431\u0443\u0434\u0443\u0442 \u043e\u0442\u043c\u0435\u043d\u0435\u043d\u044b, \u0435\u0441\u043b\u0438 \u0432\u044b \u0443\u0439\u0434\u0451\u0442\u0435 \u0441 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b.","Your browser doesn't support direct access to the clipboard. Please use the Ctrl+X\/C\/V keyboard shortcuts instead.":"\u0412\u0430\u0448 \u0431\u0440\u0430\u0443\u0437\u0435\u0440 \u043d\u0435 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442 \u043f\u0440\u044f\u043c\u043e\u0439 \u0434\u043e\u0441\u0442\u0443\u043f \u043a \u0431\u0443\u0444\u0435\u0440\u0443 \u043e\u0431\u043c\u0435\u043d\u0430. \u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u0433\u043e\u0440\u044f\u0447\u0438\u0435 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 \u0438\u043b\u0438 \u043c\u0435\u043d\u044e \u00ab\u041f\u0440\u0430\u0432\u043a\u0430\u00bb \u0432\u0430\u0448\u0435\u0433\u043e \u0431\u0440\u0430\u0443\u0437\u0435\u0440\u0430.","Insert":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c","File":"\u0424\u0430\u0439\u043b","Edit":"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c","Tools":"\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b","View":"\u041f\u0440\u043e\u0441\u043c\u043e\u0442\u0440","Table":"\u0422\u0430\u0431\u043b\u0438\u0446\u0430","Format":"\u0424\u043e\u0440\u043c\u0430\u0442","Toolbar Toggle":"\u041f\u043e\u043a\u0430\u0437\u0430\u0442\u044c\/\u0441\u043a\u0440\u044b\u0442\u044c \u043f\u0430\u043d\u0435\u043b\u044c \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u043e\u0432","Insert Read More tag":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0442\u0435\u0433 \u00ab\u0414\u0430\u043b\u0435\u0435\u00bb","Insert Page Break tag":"\u0412\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0442\u0435\u0433 \u0440\u0430\u0437\u0440\u044b\u0432\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u044b","Read more...":"\u0422\u0435\u0433 \u00ab\u0414\u0430\u043b\u0435\u0435\u00bb","Distraction-free writing mode":"\u041f\u043e\u043b\u043d\u043e\u044d\u043a\u0440\u0430\u043d\u043d\u044b\u0439 \u0440\u0435\u0436\u0438\u043c","No alignment":"\u0411\u0435\u0437 \u0432\u044b\u0440\u0430\u0432\u043d\u0438\u0432\u0430\u043d\u0438\u044f","Remove":"\u0423\u0434\u0430\u043b\u0438\u0442\u044c","Edit ":"\u0418\u0437\u043c\u0435\u043d\u0438\u0442\u044c","Paste URL or type to search":"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 URL \u0438\u043b\u0438 \u0441\u043b\u043e\u0432\u043e \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430","Apply":"\u041f\u0440\u0438\u043c\u0435\u043d\u0438\u0442\u044c","Link options":"\u041d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438 \u0441\u0441\u044b\u043b\u043a\u0438","Visual":"\u0412\u0438\u0437\u0443\u0430\u043b\u044c\u043d\u043e","Text":"\u0422\u0435\u043a\u0441\u0442","Keyboard Shortcuts":"\u0413\u043e\u0440\u044f\u0447\u0438\u0435 \u043a\u043b\u0430\u0432\u0438\u0448\u0438","Default shortcuts,":"\u0421\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u044b\u0435 \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438,","Additional shortcuts,":"\u0414\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u044b\u0435 \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438,","Focus shortcuts:":"\u041a\u043b\u0430\u0432\u0438\u0448\u0438 \u0444\u043e\u043a\u0443\u0441\u0430:","Inline toolbar (when an image, link or preview is selected)":"\u0412\u0441\u043f\u043b\u044b\u0432\u0430\u044e\u0449\u0430\u044f \u043f\u0430\u043d\u0435\u043b\u044c (\u043f\u0440\u0438 \u0432\u044b\u0431\u043e\u0440\u0435 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f, \u0441\u0441\u044b\u043b\u043a\u0438 \u0438\u043b\u0438 \u043e\u0431\u044a\u0435\u043a\u0442\u0430)","Editor menu (when enabled)":"\u041c\u0435\u043d\u044e \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430 (\u0435\u0441\u043b\u0438 \u0432\u043a\u043b\u044e\u0447\u0435\u043d\u043e)","Editor toolbar":"\u041f\u0430\u043d\u0435\u043b\u044c \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440\u0430","Elements path":"\u041f\u0443\u0442\u0438 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u043e\u0432","Ctrl + Alt + letter:":"Ctrl + Alt + \u0431\u0443\u043a\u0432\u0430:","Shift + Alt + letter:":"Shift + Alt + \u0431\u0443\u043a\u0432\u0430:","Cmd + letter:":"Cmd + \u0431\u0443\u043a\u0432\u0430:","Ctrl + letter:":"Ctrl + \u0431\u0443\u043a\u0432\u0430:","Letter":"\u0411\u0443\u043a\u0432\u0430","Action":"\u0414\u0435\u0439\u0441\u0442\u0432\u0438\u0435","Warning: the link has been inserted but may have errors. Please test it.":"\u0412\u043d\u0438\u043c\u0430\u043d\u0438\u0435: \u0441\u0441\u044b\u043b\u043a\u0430 \u0434\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u0430, \u043d\u043e \u043c\u043e\u0436\u0435\u0442 \u0441\u043e\u0434\u0435\u0440\u0436\u0430\u0442\u044c \u043e\u0448\u0438\u0431\u043a\u0438. \u041f\u043e\u0436\u0430\u043b\u0443\u0439\u0441\u0442\u0430, \u043f\u0440\u043e\u0432\u0435\u0440\u044c\u0442\u0435 \u0435\u0451.","To move focus to other buttons use Tab or the arrow keys. To return focus to the editor press Escape or use one of the buttons.":"\u0427\u0442\u043e\u0431\u044b \u043f\u0435\u0440\u0435\u043c\u0435\u0441\u0442\u0438\u0442\u044c \u0444\u043e\u043a\u0443\u0441 \u043d\u0430 \u0434\u0440\u0443\u0433\u0438\u0435 \u043a\u043d\u043e\u043f\u043a\u0438, \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 Tab \u0438\u043b\u0438 \u043a\u043b\u0430\u0432\u0438\u0448\u0438 \u0441\u043e \u0441\u0442\u0440\u0435\u043b\u043a\u0430\u043c\u0438. \u0427\u0442\u043e\u0431\u044b \u0432\u0435\u0440\u043d\u0443\u0442\u044c \u0444\u043e\u043a\u0443\u0441 \u0432 \u0440\u0435\u0434\u0430\u043a\u0442\u043e\u0440, \u043d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 \u043e\u0434\u043d\u0443 \u0438\u0437 \u043a\u043d\u043e\u043f\u043e\u043a.","When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo.":"\u0415\u0441\u043b\u0438 \u043d\u043e\u0432\u044b\u0439 \u0430\u0431\u0437\u0430\u0446 \u043d\u0430\u0447\u0438\u043d\u0430\u0435\u0442\u0441\u044f \u0441 \u043e\u0434\u043d\u043e\u0439 \u0438\u0437 \u044d\u0442\u0438\u0445 \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0439 \u0438 \u043f\u0440\u043e\u0431\u0435\u043b\u0430, \u043f\u0440\u043e\u0438\u0437\u043e\u0439\u0434\u0451\u0442 \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u043e\u0435 \u0444\u043e\u0440\u043c\u0430\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Backspace \u0438\u043b\u0438 Escape, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c.","The following formatting shortcuts are replaced when pressing Enter. Press Escape or the Undo button to undo.":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0435 \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0438 \u0437\u0430\u043c\u0435\u043d\u044f\u044e\u0442\u0441\u044f \u043f\u0440\u0438 \u043d\u0430\u0436\u0430\u0442\u0438\u0438 Enter. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 \u043a\u043d\u043e\u043f\u043a\u0443 \u043e\u0442\u043c\u0435\u043d\u044b, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c.","The next group of formatting shortcuts are applied as you type or when you insert them around plain text in the same paragraph. Press Escape or the Undo button to undo.":"\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0430\u044f \u0433\u0440\u0443\u043f\u043f\u0430 \u043a\u043e\u043c\u0431\u0438\u043d\u0430\u0446\u0438\u0439 \u0437\u0430\u043c\u0435\u043d\u044f\u0435\u0442\u0441\u044f \u043f\u043e \u043c\u0435\u0440\u0435 \u043d\u0430\u0431\u043e\u0440\u0430 \u0438\u043b\u0438 \u043f\u0440\u0438 \u043e\u0431\u0440\u0430\u043c\u043b\u0435\u043d\u0438\u0438 \u043f\u0440\u043e\u0441\u0442\u043e\u0433\u043e \u0442\u0435\u043a\u0441\u0442\u0430 \u0432 \u0442\u043e\u043c \u0436\u0435 \u043f\u0430\u0440\u0430\u0433\u0440\u0430\u0444\u0435. \u041d\u0430\u0436\u043c\u0438\u0442\u0435 Escape \u0438\u043b\u0438 \u043a\u043d\u043e\u043f\u043a\u0443 \u043e\u0442\u043c\u0435\u043d\u044b, \u0447\u0442\u043e\u0431\u044b \u043e\u0442\u043c\u0435\u043d\u0438\u0442\u044c."});
+tinymce.ScriptLoader.markDone( 'http://javastudy.ru/wp-includes/js/tinymce/langs/ru.js' );
+</script>
+<script type="text/javascript" src="../../../../Desktop/Собеседование%20по%20Java%20-%20исключения%20(exceptions)%20(вопросы%20и%20ответы)_files/wp-langs-en.js.Без%20названия"></script>
+		<script type="text/javascript">
+		tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/crayon-syntax-highlighter/util/tag-editor", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/anchor", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/code", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/insertdatetime", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/nonbreaking", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/print", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/searchreplace", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/table", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/visualblocks", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/visualchars", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/emoticons", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/advlist", "ru");
+tinyMCEPreInit.load_ext("http://javastudy.ru/wp-content/plugins/tinymce-advanced/mce/wptadv", "ru");
+
+var ajaxurl = "/wp-admin/admin-ajax.php";
+		( function() {
+			var init, id, $wrap;
+
+			if ( typeof tinymce !== 'undefined' ) {
+				if ( tinymce.Env.ie && tinymce.Env.ie < 11 ) {
+					tinymce.$( '.wp-editor-wrap ' ).removeClass( 'tmce-active' ).addClass( 'html-active' );
+					return;
+				}
+
+				for ( id in tinyMCEPreInit.mceInit ) {
+					init = tinyMCEPreInit.mceInit[id];
+					$wrap = tinymce.$( '#wp-' + id + '-wrap' );
+
+					if ( ( $wrap.hasClass( 'tmce-active' ) || ! tinyMCEPreInit.qtInit.hasOwnProperty( id ) ) && ! init.wp_skip_init ) {
+						tinymce.init( init );
+
+						if ( ! window.wpActiveEditor ) {
+							window.wpActiveEditor = id;
+						}
+					}
+				}
+			}
+
+			if ( typeof quicktags !== 'undefined' ) {
+				for ( id in tinyMCEPreInit.qtInit ) {
+					quicktags( tinyMCEPreInit.qtInit[id] );
+
+					if ( ! window.wpActiveEditor ) {
+						window.wpActiveEditor = id;
+					}
+				}
+			}
+		}());
+		</script>
+				<div id="wp-link-backdrop" style="display: none"></div>
+		<div id="wp-link-wrap" class="wp-core-ui" style="display: none" role="dialog" aria-labelledby="link-modal-title">
+		<form id="wp-link" tabindex="-1">
+		<input type="hidden" id="_ajax_linking_nonce" name="_ajax_linking_nonce" value="9b83a02a31">		<h1 id="link-modal-title">Вставить/изменить ссылку</h1>
+		<button type="button" id="wp-link-close"><span class="screen-reader-text">Закрыть</span></button>
+		<div id="link-selector">
+			<div id="link-options">
+				<p class="howto" id="wplink-enter-url">Введите адрес назначения (URL)</p>
+				<div>
+					<label><span>URL</span>
+					<input id="wp-link-url" type="text" aria-describedby="wplink-enter-url" class="form-control"></label>
+				</div>
+				<div class="wp-link-text-field">
+					<label><span>Текст ссылки</span>
+					<input id="wp-link-text" type="text" class="form-control"></label>
+				</div>
+				<div class="link-target">
+					<label><span></span>
+					<input type="checkbox" id="wp-link-target"> Открывать в новой вкладке</label>
+				</div>
+			</div>
+			<p class="howto" id="wplink-link-existing-content">Или сделайте ссылку на существующий материал</p>
+			<div id="search-panel">
+				<div class="link-search-wrapper">
+					<label>
+						<span class="search-label">Поиск</span>
+						<input type="search" id="wp-link-search" class="link-search-field" autocomplete="off" aria-describedby="wplink-link-existing-content">
+						<span class="spinner"></span>
+					</label>
+				</div>
+				<div id="search-results" class="query-results" tabindex="0">
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+				</div>
+				<div id="most-recent-results" class="query-results" tabindex="0">
+					<div class="query-notice" id="query-notice-message">
+						<em class="query-notice-default">Поисковый запрос не задан. Показаны недавние элементы.</em>
+						<em class="query-notice-hint screen-reader-text">Воспользуйтесь поиском или клавишами вверх/вниз, чтобы выбрать элемент.</em>
+					</div>
+					<ul></ul>
+					<div class="river-waiting">
+						<span class="spinner"></span>
+					</div>
+ 				</div>
+ 			</div>
+		</div>
+		<div class="submitbox">
+			<div id="wp-link-cancel">
+				<button type="button" class="button">Отмена</button>
+			</div>
+			<div id="wp-link-update">
+				<input type="submit" value="Добавить ссылку" class="button button-primary btn btn-primary" id="wp-link-submit" name="wp-link-submit">
+			</div>
+		</div>
+		</form>
+		</div>
+				<script>
+		!function(a,b){"undefined"!=typeof a&&"undefined"!=typeof b&&a(function(){b.addButton("sofbg-axcell","&para;",function(b,c){
+		var d=a(c),e=a.trim(d.val()),f="table|thead|tfoot|caption|col|colgroup|tbody|tr|td|th|div|dl|dd|dt|ul|ol|li|pre|form|map|area|blockquote|" +
+		"address|math|style|p|h[1-6]|hr|fieldset|legend|tmadv|section|article|aside|hgroup|header|footer|nav|figure|figcaption|details|menu|summary";
+		-1!==e.indexOf("</p>")&&-1===e.indexOf("\n\n")&&(e=e.replace(new RegExp("<(?:"+f+")(?: [^>]*)?>","gi"),"\n$&"),
+		e=e.replace(new RegExp("</(?:"+f+")>","gi"),"$&\n"),e=e.replace(/(<br(?: [^>]*)?>)[\r\n\t]*/gi,"$1\n"),
+		e=e.replace(/>\n[\r\n\t]+</g,">\n<"),e=e.replace(/^<li/gm,"	<li"),e=e.replace(/<td>\u00a0<\/td>/g,"<td>&nbsp;</td>"),
+		d.val(a.trim(e)))},"","","Fix line breaks")})}(window.jQuery,window.QTags);
+		</script>
+		
+
+<!-- Dynamic page generated in 0.626 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2018-11-09 13:26:34 -->
+
+<!-- Compression = gzip --><div id="cboxOverlay" style="opacity: 0; cursor: pointer; visibility: visible; display: none;"></div><div id="colorbox" class="" role="dialog" tabindex="-1" style="display: none; visibility: visible; top: 1377px; left: 76px; position: absolute; width: 1369px; height: 641px; opacity: 0;"><div id="cboxWrapper" style="height: 641px; width: 1369px;"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left; width: 1319px;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left; height: 591px;"></div><div id="cboxContent" style="float: left; width: 1319px; height: 591px;"><div id="cboxTitle" style="float: left; display: block;">Иерархия Исключений Java</div><div id="cboxCurrent" style="float: left; display: block;">image 1 of 2</div><button type="button" id="cboxPrevious" style="display: block;">previous</button><button type="button" id="cboxNext" style="display: block;">next</button><button id="cboxSlideshow" style="display: none;"></button><div id="cboxLoadingOverlay" style="float: left; display: none;"></div><div id="cboxLoadingGraphic" style="float: left; display: none;"></div><button type="button" id="cboxClose">close</button></div><div id="cboxMiddleRight" style="float: left; height: 591px;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left; width: 1319px;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; max-width: none; display: none;"></div></div><div id="wp-a11y-speak-polite" aria-live="polite" aria-relevant="additions text" aria-atomic="true" class="screen-reader-text wp-a11y-speak-region"></div><div id="wp-a11y-speak-assertive" aria-live="assertive" aria-relevant="additions text" aria-atomic="true" class="screen-reader-text wp-a11y-speak-region"></div></body></html>
