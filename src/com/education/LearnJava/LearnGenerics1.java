@@ -3,7 +3,7 @@ package com.education.LearnJava;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LearnGenerics {
+public class LearnGenerics1 {
     public static void main(String[] args) {
 
         List animals = new ArrayList();
@@ -31,7 +31,7 @@ public class LearnGenerics {
         animals3.add("dog");
         animals3.add("frog");
 
-        LearnGenerics l = new LearnGenerics();
+        LearnGenerics1 l = new LearnGenerics1();
         l.getAll();
     }
 
