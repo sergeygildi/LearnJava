@@ -1,39 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="90bbf6c7-2d9b-42e7-beaf-0770931614aa" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Behavioral/Observer/Observer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Behavioral/State/State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Behavioral/Strategy/Strategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/factory/impl/RussianFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/factory/impl/USAFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/factory/interfaces/TransportFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/start/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/impl/aircraft/Boeing747.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/impl/aircraft/TU134.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/impl/car/Niva.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/impl/car/Porsche.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/interfaces/Airoraft.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/transport/interfaces/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/CarSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Jeep.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Mersedec.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/NewJeep.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Porsche.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/RoadType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Start.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/FactoryMethod/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/Singleton/Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/Singleton/TestSingleton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Strctural/Adapter/Adapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Strctural/Decorator/Decorator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Strctural/Facade/Facade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/education/LearnJava/LearnDownClass/Electrocar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnDownClass/Electrocar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/Hiy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/SomeName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/TryRunNewObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/education/LearnJava/LearnHowCreateNewObject/TryRunNewObject.java" afterDir="false" />
-    </list>
+    <list default="true" id="90bbf6c7-2d9b-42e7-beaf-0770931614aa" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -160,8 +128,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/start/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+            <state>
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -392,6 +359,44 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="LearnJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnPatterns" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LearnJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnPatterns" type="462c0819:PsiDirectoryNode" />
+              <item name="Creational" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LearnJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnPatterns" type="462c0819:PsiDirectoryNode" />
+              <item name="Creational" type="462c0819:PsiDirectoryNode" />
+              <item name="AbstractFactory" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LearnJava" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnJava" type="462c0819:PsiDirectoryNode" />
+              <item name="LearnPatterns" type="462c0819:PsiDirectoryNode" />
+              <item name="Creational" type="462c0819:PsiDirectoryNode" />
+              <item name="AbstractFactory" type="462c0819:PsiDirectoryNode" />
+              <item name="start" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -404,7 +409,7 @@
     <property name="SearchEverywhereHistoryKey" value="IOE&#9;PSI&#9;JAVA://java.io.IOException&#10;Throw&#9;PSI&#9;JAVA://java.lang.Throwable&#10;Math&#9;PSI&#9;JAVA://java.lang.Math&#10;Random&#9;PSI&#9;JAVA://java.util.Random&#10;scope&#9;ACTION&#9;NewGuiceScopeAnnotation" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543605131460" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543605453055" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -517,7 +522,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80128000" />
+    <option name="totallyTimeSpent" value="80484000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -541,12 +546,12 @@
       <window_info anchor="bottom" id="Inspection Results" weight="0.32974428" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32839838" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3001346" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3001346" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3983629" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3287858" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32974428" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32967034" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3287858" />
@@ -564,6 +569,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -716,8 +731,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/education/LearnJava/LearnPatterns/Creational/AbstractFactory/start/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="11" column="51" selection-start-line="11" selection-start-column="51" selection-end-line="11" selection-end-column="51" />
+        <state>
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
