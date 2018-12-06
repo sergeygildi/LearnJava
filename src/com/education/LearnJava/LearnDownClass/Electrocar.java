@@ -54,6 +54,6 @@ public class Electrocar {
     }
 
     private void test(Object o) {
-        System.out.println("Hiy");
+        System.out.println("SomeName");
     }
 }
