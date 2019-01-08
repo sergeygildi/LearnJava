@@ -1,5 +1,4 @@
-package com.headfirst.desingpatterns.SecondExample;
-import java.util.*;
+package com.headfirst.desingpatterns.Observer;
 
 public interface Observer {
     void update(float temp, float humidity, float pressure);

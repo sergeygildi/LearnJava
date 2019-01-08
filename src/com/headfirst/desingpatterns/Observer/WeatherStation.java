@@ -1,4 +1,4 @@
-package com.headfirst.desingpatterns.SecondExample;
+package com.headfirst.desingpatterns.Observer;
 
 public class WeatherStation {
     public static void main(String[] args) {

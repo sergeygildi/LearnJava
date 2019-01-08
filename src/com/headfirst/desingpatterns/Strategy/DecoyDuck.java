@@ -1,4 +1,4 @@
-package com.headfirst.desingpatterns.firstExample;
+package com.headfirst.desingpatterns.Strategy;
 
 public class DecoyDuck extends Duck {
     @Override

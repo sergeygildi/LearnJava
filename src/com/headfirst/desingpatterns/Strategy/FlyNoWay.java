@@ -1,4 +1,4 @@
-package com.headfirst.desingpatterns.firstExample;
+package com.headfirst.desingpatterns.Strategy;
 
 public class FlyNoWay implements FlyBehavior {
     @Override

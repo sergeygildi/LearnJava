@@ -1,4 +1,4 @@
-package com.headfirst.desingpatterns.SecondExample;
+package com.headfirst.desingpatterns.Observer;
 
 public interface Subject{
     void registerObserver(Observer o);

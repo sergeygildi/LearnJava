@@ -1,4 +1,4 @@
-package com.headfirst.desingpatterns.SecondExample;
+package com.headfirst.desingpatterns.Observer;
 import java.util.Observable;
 import java.util.Observer;
 
