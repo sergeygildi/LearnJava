@@ -9,9 +9,9 @@ public class WriteToFile {
         File file = new File("TestFile");
         PrintWriter pw = new PrintWriter(file);
 
-        pw.println("Test row 1");
-        pw.println("Test row 2");
-        pw.println("Test row 3");
+        pw.println("Soy row 1");
+        pw.println("Soy row 2");
+        pw.println("Soy row 3");
 
         pw.close();
     }
